@@ -1,0 +1,32 @@
+<html>
+<head>
+  <title>LinkedIn Connect Testing Framework</title>
+  <link href="style/main.css" rel="stylesheet" />
+  <link href='http://fonts.googleapis.com/css?family=Reenie+Beanie|Droid+Sans' rel='stylesheet'>
+  <script  type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="js/spec.js"></script>
+  <script src="js/main.js"></script>
+  <script src="http://github.com/jquery/qunit/raw/master/qunit/qunit.js"></script>
+  <link href="http://github.com/jquery/qunit/raw/master/qunit/qunit.css" rel="stylesheet" />
+  <script type="text/javascript" src="http://qatest216a.qa.linkedin.com:8080/uas/connect/jsServlet/bootstrap/in.js">
+  api_key: Aa1Iy2b3C_0LR0T2nvoy8EM-BlvVsKVxvofEeulOGHKdpMzLoskChgJaxUC2U4t4
+  onLoad: IN.Test.onLogin
+  </script>
+</head>
+<body>
+  <div id='main'>
+    <div id="login-button">
+      <div id="legend">To run the test suite...</div>
+      <script type="in/login"></script>
+      <br style="clear:both">
+    </div>
+    <div id="content">
+      <h1 id="qunit-header">LinkedIn Connect Framework Test Suite</h1>
+      <h2 id="qunit-banner"></h2>
+      <h2 id="qunit-userAgent"></h2>
+      <ol id="qunit-tests"></ol>
+      <div id="qunit-fixture">test markup, will be hidden</div>
+    </div>
+  </div>
+</body>
+</html>
