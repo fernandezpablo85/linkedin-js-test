@@ -1,7 +1,27 @@
-var profileSpec = new Spec('profile-spec', 
-function(){
-  assert(true == true, 'this is good');
-  assert(true == false, 'this is not good');
-});
-var $Specs = $Specs || [];
-$Specs.push(profileSpec);
+(function(){
+  var test = (function(){
+    var that = {};
+    
+    that.name = "IN.API.Profile";
+    
+    that.run = function()
+    {
+      Assert.setName(this.name);
+      
+      var asserts = function(profile){
+        Assert.ok(typeof profile !== "undefined", "Should return an object");
+        Assert.equals("Bruce",profile.firstName);
+        Assert.equals("Willis",profile.lastName);
+        Assert.equals(profile.id, "aCyeOo0-FK");
+      }
+      
+      IN.API.Profile("me")
+        .first(function(data){
+          asserts(data);
+        });      
+    }
+    
+    return that;
+  })();
+  $Tests.push(test);
+})();

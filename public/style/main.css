@@ -1,12 +1,20 @@
-#login-button
+#main > *
 {
   margin:10px;
-  padding:10px;
+  padding:10px; 
+  border:1px solid gray;
+  -webkit-border-radius:15px;
+  -moz-border-radius:15px;
+}
+
+#header
+{
+  font-family:"Droid Sans";
 }
 
 #legend
 {
-  font-family:"Reenie Beanie" !important;
+  font-family:"Reenie Beanie";
   font-size:2em;
   margin-right:20px;
 }
@@ -14,4 +22,19 @@
 #login-button > *
 {
   float:left;
+}
+
+#content
+{
+  display:none;
+}
+
+ul li.pass 
+{
+  color:green;
+}
+
+ul li.fail 
+{
+  color:red;
 }

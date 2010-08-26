@@ -5,9 +5,7 @@ IN.Test.Specs = ['profile'];
 IN.Test.onLogin = function()
 {
   IN.Event.on(IN, "auth", IN.Test.setUpUI);
-  $(window).bind('test-failed',function(event, description){
-    alert('something went wrong: ' + description);
-  });
+  Display.init();
 }
 
 IN.Test.setUpUI = function()
