@@ -25,9 +25,25 @@ IN.Test.Case = function(name)
     this.assertTrue(typeof object !== "undefined", "object should not be undefined");
   }
   
+  this.assertFail = function(error)
+  {
+    this.results.push({'description':error, 'passed': false});
+  }
+  
   this.finish = function()
   {
-    $(window).trigger("test-finished", {'name': this.name, 'results': this.results});
+    $(window).trigger("test-finished", {'name': this.name, 'results': this.results , 'passed': !this.hasErrors()});
+  }
+  
+  this.hasErrors = function()
+  {
+    var errors = false;
+    for(var i = 0; i < this.results.length; i++)
+    {
+      var result = this.results[i];
+      errors = errors || !result.passed;
+    }
+    return errors;
   }
   
 }

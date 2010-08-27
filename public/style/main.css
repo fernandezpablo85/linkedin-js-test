@@ -41,6 +41,35 @@ ul li.fail
   list-style-image:url(../img/cancel.png);
 }
 
+#test-results div
+{
+  border:1px solid gray;
+  -webkit-border-radius:15px;
+  -moz-border-radius:15px;
+  padding:5px;
+  margin:10px 0px;
+}
+
+#test-results div:hover
+{
+  cursor:pointer;
+}
+
+div.fail 
+{
+  background-color:#EBB;
+}
+
+div.fail ul li.pass
+{
+  color:black;
+}
+
+div.fail h4
+{
+  color:red;
+}
+
 #info 
 {
   float:right;

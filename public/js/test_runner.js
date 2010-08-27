@@ -9,11 +9,15 @@ IN.Test.Runner = (function()
     var len = $Tests.length;
     for(var i = 0; i < len; i++)
     {
+      var testCase = new IN.Test.Case($Tests[i].name)
       try
       {
-        $Tests[i].run();  
+        $Tests[i].run(testCase);  
       }
-      catch(e){}
+      catch(e)
+      {
+        testCase.assertFail("Got exception: " + e);
+      }
       
     }
   }

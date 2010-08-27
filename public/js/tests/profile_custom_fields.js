@@ -4,10 +4,8 @@
     
     that.name = "Should return custom fields when asked";
     
-    that.run = function()
-    {
-      var testCase = new IN.Test.Case(that.name);
-      
+    that.run = function(testCase)
+    { 
       var asserts = function(profile)
       {
         testCase.assertDefined(profile);

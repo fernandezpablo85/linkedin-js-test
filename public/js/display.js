@@ -22,8 +22,10 @@ IN.Test.Display = (function(){
       }
       $ul.append($li);
     }
-    $(_resultList).append($('<h4>').text(response.name));
-    $(_resultList).append($ul);
+    $entry = $('<div>').addClass('entry').addClass(response.passed? "pass" : "fail");
+    $($entry).append($('<h4>').text(response.name));
+    $($entry).append($ul);
+    $(_resultList).append($entry);
   }
    
   var onTestLoad = function(event, test)
