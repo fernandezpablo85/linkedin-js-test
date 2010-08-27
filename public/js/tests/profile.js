@@ -2,7 +2,7 @@
   var test = (function(){
     var that = {};
     
-    that.name = "IN.API.Profile";
+    that.name = "IN.API.Profile# Should return self when asked for 'me'";
     
     that.run = function()
     {
