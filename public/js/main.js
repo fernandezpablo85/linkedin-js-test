@@ -1,6 +1,5 @@
 var IN = IN || {};
 IN.Test = IN.Test || {};
-IN.Test.Cases = ['profile'];
 
 IN.Test.onLogin = function()
 {

@@ -2,16 +2,18 @@
   var test = (function(){
     var that = {};
     
+    that.name = "Should return self when asked for 'me'";
+    
     that.run = function()
     {
-      var testCase = new IN.Test.Case("IN.API.Profile# Should return self when asked for 'me'");
+      var testCase = new IN.Test.Case(that.name);
       
       var asserts = function(profile)
       {
-        testCase.assertTrue(typeof profile !== "undefined", "Result must not be undefined");
+        testCase.assertDefined(profile)
         testCase.assertEquals("Bruce",profile.firstName, "Should return first name");
         testCase.assertEquals("Willis",profile.lastName, "Should return last name");
-        testCase.assertEquals(profile.id, "aCyeOo0-FK", "Should return member Id");
+        testCase.assertEquals(profile.id, "sfC4Qoby_r", "Should return member Id");
         testCase.finish();
       }
       
@@ -23,5 +25,5 @@
     
     return that;
   })();
-  $Tests.push(test);
+  $(window).trigger("test-load",test);
 })();

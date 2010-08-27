@@ -8,31 +8,37 @@ IN.Test.Display = (function(){
     for(var i =0; i < response.results.length; i++)
     {
       var test = response.results[i];
-      var $li = $('<li>').text(test.description);
-      $li.addClass((test.failed) ? "fail" : "pass");
+      var $li = $('<li>');
+      if(test.passed)
+      {
+        $li.addClass("pass");
+        $li.text(test.description);
+      }
+      else
+      {
+        $li.addClass("fail");
+        var msg = test.description + " failed. Expected: " + test.expected + " but got: " + test.got;
+        $li.text(msg);
+      }
       $ul.append($li);
     }
     $(_resultList).append($('<h4>').text(response.name));
     $(_resultList).append($ul);
   }
    
-  var onAllTestLoad = function()
+  var onTestLoad = function(event, test)
   {
-    $content = $('#content');
-    $content.append("<div class='notification'>All Test Cases Loaded!</div>");
-    $content.fadeIn('slow', function(){
-      setTimeout(function(){
-        $content.find('.notification').fadeOut('slow');
-      },100);
-    });
-    $('#run').show();
+    $content = $('#info');
+    $content.append("<span class='notification'>Loaded: " + test.name + "</span><br/>");
+    $('#control-panel').show();
+    $('#content').show();
   }
   
   
   that.init = function()
   {
     $(window).bind('test-finished', onTestFinished);
-    $(window).bind('test-all-loaded', onAllTestLoad);
+    $(window).bind('test-load', onTestLoad);
   }
   
   return that;

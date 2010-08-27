@@ -1,9 +1,19 @@
+
+IN.Test.Cases = ['profile_me', 'profile_by_id', 'profile_custom_fields'];
+
 IN.Test.Loader = (function()
 {
   var that = {};
   
+  function loadTest(event, test)
+  {
+    $Tests.push(test);
+  }
+  
   that.init = function()
   {
+    $(window).bind("test-load",loadTest);
+    
     var tests = IN.Test.Cases.length;
     for(var i = 0; i < tests; i++)
     {
@@ -13,10 +23,6 @@ IN.Test.Loader = (function()
       var head = document.getElementsByTagName("head")[0];         
       head.appendChild(script);
     }
-    
-    // TODO: some tests might not have been loaded (since <script> load is async).
-    // Need to do something like jQuery's DOM ready event.
-    $(window).trigger('test-all-loaded',{"total": tests});
   }
   
   

@@ -40,3 +40,12 @@ ul li.fail
   color:red;
   list-style-image:url(../img/cancel.png);
 }
+
+#info 
+{
+  float:right;
+  border:1px solid gray;
+  -webkit-border-radius:15px;
+  -moz-border-radius:15px;
+  padding:10px;
+}

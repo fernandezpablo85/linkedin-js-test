@@ -9,13 +9,19 @@ IN.Test.Runner = (function()
     var len = $Tests.length;
     for(var i = 0; i < len; i++)
     {
-      $Tests[i].run();
+      try
+      {
+        $Tests[i].run();  
+      }
+      catch(e){}
+      
     }
   }
   
   that.init = function()
   {
     $('#run').click(function(event){
+      $('#test-results').text("");
       runAllTests();
     });
   }

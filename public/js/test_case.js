@@ -12,12 +12,17 @@ IN.Test.Case = function(name)
   {
     if(one === other)
     {
-      this.results.push({'description': description, 'passed':true})
+      this.results.push({'description': description, 'passed':true});
     }
     else
     {
       this.results.push({'description': description, 'passed':false, 'expected': new String(one), 'got': new String(other)});
     }
+  }
+  
+  this.assertDefined = function(object)
+  {
+    this.assertTrue(typeof object !== "undefined", "object should not be undefined");
   }
   
   this.finish = function()
