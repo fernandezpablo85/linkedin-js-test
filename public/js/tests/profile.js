@@ -6,9 +6,13 @@
     
     that.run = function()
     {
+      // alias for readability
+      var Assert = IN.Test.Assert;
+      
       Assert.setName(this.name);
       
-      var asserts = function(profile){
+      var asserts = function(profile)
+      {
         Assert.ok(typeof profile !== "undefined", "Should return an object");
         Assert.equals("Bruce",profile.firstName);
         Assert.equals("Willis",profile.lastName);

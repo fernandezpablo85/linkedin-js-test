@@ -1,10 +1,10 @@
-var Assert = (function(){
+IN.Test.Assert = (function(){
   var that = {};
-  that.name = "";
+  var _name = "";
     
   that.setName = function(name)
   {
-    that.name = name;
+    _name = name;
   }
   
   that.ok = function(condition, description)
@@ -16,11 +16,11 @@ var Assert = (function(){
   {
     if(one === other)
     {
-      $(window).trigger('test-pass',{'name': that.name, 'description': description});
+      $(window).trigger('test-pass',{'name': _name, 'description': description});
     }
     else
     {
-      $(window).trigger('test-failed',{'name': that.name, 'description': description, 'expected': new String(one), 'got': new String(other)});
+      $(window).trigger('test-failed',{'name': _name, 'description': description, 'expected': new String(one), 'got': new String(other)});
     }
   }
   
