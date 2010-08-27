@@ -1,3 +1,5 @@
+var $Tests = $Tests || [];
+
 IN.Test.Runner = (function()
 {
   var that = {};

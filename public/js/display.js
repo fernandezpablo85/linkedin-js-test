@@ -2,29 +2,20 @@ IN.Test.Display = (function(){
   var that = {};
   var _resultList = "#test-results";
   
-  var onTestPass = function(event, result)
-  {
-    var $li = $('<li>').text("[" + result.name + "] test passed.");
-    $li.addClass('pass');
-    $(_resultList).append($li);
-  }
-  
-  var onTestFail = function(event, result)
-  {
-    var $li;
-    if(result.expected)
+  var onTestFinished = function(event, response)
+  { 
+    $ul = $('<ul>').addClass('test');
+    for(var i =0; i < response.results.length; i++)
     {
-      $li = $('<li>').text("[" + result.name + "] test failed!. Expected: " + result.expected + " but got: " + result.got);  
+      var test = response.results[i];
+      var $li = $('<li>').text(test.description);
+      $li.addClass((test.failed) ? "fail" : "pass");
+      $ul.append($li);
     }
-    else
-    {
-      $li = $('<li>').text("[" + result.name + "] test failed! " + result.name);  
-    }
-    $li.addClass('fail');
-    $(_resultList).append($li);
-    
+    $(_resultList).append($('<h4>').text(response.name));
+    $(_resultList).append($ul);
   }
-  
+   
   var onAllTestLoad = function()
   {
     $content = $('#content');
@@ -40,8 +31,7 @@ IN.Test.Display = (function(){
   
   that.init = function()
   {
-    $(window).bind('test-failed', onTestFail);
-    $(window).bind('test-pass', onTestPass);
+    $(window).bind('test-finished', onTestFinished);
     $(window).bind('test-all-loaded', onAllTestLoad);
   }
   
