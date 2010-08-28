@@ -2,6 +2,13 @@ IN.Test.Case = function(name)
 {
   this.name = name;
   this.results = [];
+  this.completed = false;
+  this.timeout = 1000;
+  
+  this.setTimeout = function(timeout)
+  {
+    this.timeout = timeout;
+  }
       
   this.assertTrue = function(condition, description)
   {
@@ -25,13 +32,34 @@ IN.Test.Case = function(name)
     this.assertTrue(typeof object !== "undefined", "object should not be undefined");
   }
   
-  this.assertFail = function(error)
+  this.fail = function(error)
   {
     this.results.push({'description':error, 'passed': false});
   }
   
+  this.run = function(test)
+  {
+    var me = this;
+    setTimeout(function(){
+      me.checkFinished(test);
+    }, this.timeout);
+    
+    test.run(this);
+  }
+  
+  this.checkFinished = function(testCase)
+  {
+    if(!this.completed)
+    {
+      this.fail("Test timed out");  
+      this.finish();
+    }
+      
+  }
+  
   this.finish = function()
   {
+    this.completed = true;
     $(window).trigger("test-finished", {'name': this.name, 'results': this.results , 'passed': !this.hasErrors()});
   }
   

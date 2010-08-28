@@ -1,5 +1,4 @@
-
-IN.Test.Cases = ['profile_me', 'profile_by_id', 'profile_custom_fields'];
+IN.Test.Cases = ['profile_me', 'profile_by_id', 'profile_custom_fields', 'profile_handle_error'];
 
 IN.Test.Loader = (function()
 {
@@ -19,7 +18,7 @@ IN.Test.Loader = (function()
     {
       var script = document.createElement( 'script' );
       script.type = 'text/javascript';
-      script.src = 'js/tests/' + IN.Test.Cases[i] + '.js';
+      script.src = 'js/tests/' + IN.Test.Cases[i] + '.js?rnd=' + Math.random();
       var head = document.getElementsByTagName("head")[0];         
       head.appendChild(script);
     }

@@ -11,7 +11,6 @@
         testCase.assertDefined(profile)
         testCase.assertEquals("Bruce",profile.firstName, "Should return first name");
         testCase.assertEquals("Willis",profile.lastName, "Should return last name");
-        testCase.assertEquals(profile.id, "sfC4Qoby_r", "Should return member Id");
         testCase.finish();
       }
       

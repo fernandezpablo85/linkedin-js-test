@@ -7,7 +7,7 @@
   -moz-border-radius:15px;
 }
 
-#header
+body
 {
   font-family:"Droid Sans";
 }
@@ -28,6 +28,18 @@
 {
   display:none;
 }
+
+#run
+{
+  margin:10px;
+  padding:10px;
+}
+
+#run:hover
+{
+  cursor:pointer;
+}
+
 
 ul li.pass 
 {
@@ -50,11 +62,6 @@ ul li.fail
   margin:10px 0px;
 }
 
-#test-results div:hover
-{
-  cursor:pointer;
-}
-
 div.fail 
 {
   background-color:#EBB;
@@ -72,6 +79,7 @@ div.fail h4
 
 #info 
 {
+  background-color:#CCD;
   float:right;
   border:1px solid gray;
   -webkit-border-radius:15px;

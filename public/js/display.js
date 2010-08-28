@@ -17,7 +17,7 @@ IN.Test.Display = (function(){
       else
       {
         $li.addClass("fail");
-        var msg = test.description + " failed. Expected: " + test.expected + " but got: " + test.got;
+        var msg = test.description + ". Expected: " + test.expected + " but got: " + test.got;
         $li.text(msg);
       }
       $ul.append($li);

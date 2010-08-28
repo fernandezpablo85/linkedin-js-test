@@ -12,11 +12,12 @@ IN.Test.Runner = (function()
       var testCase = new IN.Test.Case($Tests[i].name)
       try
       {
-        $Tests[i].run(testCase);  
+        testCase.run($Tests[i]);
       }
       catch(e)
       {
-        testCase.assertFail("Got exception: " + e);
+        testCase.fail("Got exception: " + e);
+        testCase.finish();
       }
       
     }

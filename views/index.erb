@@ -9,8 +9,11 @@
   <script src="js/test_case.js"></script>
   <script src="js/test_loader.js"></script>
   <script src="js/test_runner.js"></script>
-  <script type="text/javascript" src="http://qatest216b.qa.linkedin.com:8080/uas/connect/jsServlet/bootstrap/in.js">
-  api_key: wq53h-vM5w9zMogQb3k9E46ActkmUU8HMr55XI54Zp-tBeD4TKNrGpRnaCvn6M3Y
+  <% server = params[:server] || "qatest216b.qa.linkedin.com:8080" %>
+  <% key = params[:key] || "SB2MekkK1qAGzbm3YIIfAOCOmJirPSto5p-Zz424jB88EruKPe5_apCPwK9r5SsY" %>
+  <% script_src = "http://#{server}/uas/connect/jsServlet/bootstrap/in.js" %>
+  <script type="text/javascript" <%="src='#{script_src}'"%>>
+  api_key: <%=key%>
   authorize:true
   onLoad: IN.Test.onLogin
   </script>
@@ -28,7 +31,7 @@
     <div id="content">
       <div id="info"></div>
       <div id="control-panel">
-        <a href="#" id="run">Run all Tests</a>
+        <button id="run">Run all Tests</button>
       </div>
       <br style="clear:both"/>
       <div id="test-results">
