@@ -6,18 +6,17 @@ IN.Test.Runner = (function()
   
   var runAllTests = function()
   {
-    var len = $Tests.length;
-    for(var i = 0; i < len; i++)
+    for(var i = 0; i < $Tests.length; i++)
     {
-      var testCase = new IN.Test.Case($Tests[i].name)
+      var test = $Tests[i];
       try
       {
-        testCase.run($Tests[i]);
+        test.run();
       }
       catch(e)
       {
-        testCase.fail("Got exception: " + e);
-        testCase.finish();
+        test.fail("Got exception: " + e);
+        test.finish();
       }
       
     }

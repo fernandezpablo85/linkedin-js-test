@@ -1,4 +1,4 @@
-IN.Test.Cases = ['profile_me', 'profile_by_id', 'profile_custom_fields', 'profile_handle_error'];
+IN.Test.Cases = ['profile_me', 'profile_custom_fields','profile_handle_errors'];
 
 IN.Test.Loader = (function()
 {

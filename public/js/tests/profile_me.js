@@ -1,26 +1,16 @@
-(function(){
-  var test = (function(){
-    var that = {};
-    
-    that.name = "Should return self when asked for 'me'";
-    
-    that.run = function(testCase)
-    { 
-      var asserts = function(profile)
-      {
-        testCase.assertDefined(profile)
-        testCase.assertEquals("Bruce",profile.firstName, "Should return first name");
-        testCase.assertEquals("Willis",profile.lastName, "Should return last name");
-        testCase.finish();
-      }
-      
-      IN.API.Profile("me")
-        .first(function(data){
-          asserts(data);
-        });      
-    }
-    
-    return that;
-  })();
-  $(window).trigger("test-load",test);
-})();
+new IN.Test.TestCase("Should return self when asked for 'me'", function(){
+  var me = this;
+  var asserts = function(profile)
+  {
+    console.log(this);
+    this.assertDefined(profile)
+    this.assertEquals("Bruce",profile.firstName, "Should return first name");
+    this.assertEquals("Willis",profile.lastName, "Should return last name");
+    this.finish();
+  }
+  
+  IN.API.Profile("me")
+    .first(function(data){
+      asserts.apply(me,[data]);
+    });
+});

@@ -17,7 +17,11 @@ IN.Test.Display = (function(){
       else
       {
         $li.addClass("fail");
-        var msg = test.description + ". Expected: " + test.expected + " but got: " + test.got;
+        var msg = "Assertion failed: " + test.description;
+        if(test.expected)
+        {
+          msg += ". Expected: " + test.expected + " but got: " + test.got;
+        }
         $li.text(msg);
       }
       $ul.append($li);
