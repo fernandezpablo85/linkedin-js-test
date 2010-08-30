@@ -41,6 +41,10 @@ body
 }
 
 
+{
+  
+}
+
 ul li.pass 
 {
   color:green;
@@ -60,6 +64,7 @@ ul li.fail
   -moz-border-radius:15px;
   padding:5px;
   margin:10px 0px;
+  text-transform:capitalize;
 }
 
 div.fail 

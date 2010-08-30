@@ -38,6 +38,7 @@ IN.Test.AbstractTest = function()
   this.run = function(test)
   {
     var me = this;
+    me.results = [];
     setTimeout(function(){
       me.checkFinished(test);
     }, this.timeout);
