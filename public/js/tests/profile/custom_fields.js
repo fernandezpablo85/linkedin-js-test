@@ -1,4 +1,4 @@
-new IN.Test.TestCase('Profile: Should return custom fields when asked', function(){
+new IN.Test.TestCase('Should return custom fields when asked', function(){
   IN.API.Profile("me")
   .fields("firstName", "lastName", "connections")
   .first(function(profile){
@@ -9,4 +9,4 @@ new IN.Test.TestCase('Profile: Should return custom fields when asked', function
     this.finish();
   },this);
   
-});
+}, {'category':'profile'});

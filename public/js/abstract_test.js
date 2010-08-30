@@ -1,6 +1,5 @@
 IN.Test.AbstractTest = function()
 {
-
   this.assertTrue = function(condition, description)
   {
     if(condition)
@@ -64,7 +63,7 @@ IN.Test.AbstractTest = function()
   this.finish = function()
   {
     this.completed = true;
-    $(window).trigger("test-finished", {'name': this.name, 'results': this.results , 'passed': !this.hasErrors()});
+    $(window).trigger("test-finished", {'category': this.category, 'name': this.name, 'results': this.results , 'passed': !this.hasErrors()});
   }
   
   this.hasErrors = function()

@@ -27,7 +27,7 @@ IN.Test.Display = (function(){
       $ul.append($li);
     }
     $entry = $('<div>').addClass('entry').addClass(response.passed? "pass" : "fail");
-    $($entry).append($('<h4>').text(response.name));
+    $($entry).append($('<h4>').text(response.category + ": " + response.name));
     $($entry).append($ul);
     $(_resultList).append($entry);
   }
@@ -35,7 +35,7 @@ IN.Test.Display = (function(){
   var onTestLoad = function(event, test)
   {
     $content = $('#info');
-    $content.append("<span class='notification'>Loaded: " + test.name + "</span><br/>");
+    $content.append("<span class='notification'>" + test.category + " - " + test.name + "</span><br/>");
     $('#control-panel').show();
     $('#content').show();
   }

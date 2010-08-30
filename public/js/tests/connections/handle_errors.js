@@ -1,4 +1,4 @@
-new IN.Test.TestCase('Connections: Should fail for multiple ids', function(){
+new IN.Test.TestCase('Should fail for multiple ids', function(){
   try
   {
     IN.API.Connections("id1","id2").all(function(data){
@@ -12,9 +12,9 @@ new IN.Test.TestCase('Connections: Should fail for multiple ids', function(){
     this.finish();
   }
   
-});
+}, {'category':'connections'});
 
-new IN.Test.TestCase('Connections: Should fail if no Id provided', function(){
+new IN.Test.TestCase('Should fail if no Id provided', function(){
   try
   {
     IN.API.Connections().all(function(data){
@@ -28,4 +28,4 @@ new IN.Test.TestCase('Connections: Should fail if no Id provided', function(){
     this.finish();
   }
   
-});
+}, {'category':'connections'});

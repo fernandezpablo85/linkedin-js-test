@@ -1,4 +1,4 @@
-new IN.Test.TestCase('Profile: Should call either error() or first()', function(){
+new IN.Test.TestCase('Should call either error() or first()', function(){
 
   IN.API.Profile("sfC4Qoby_r")
   .error(function(data){
@@ -11,7 +11,7 @@ new IN.Test.TestCase('Profile: Should call either error() or first()', function(
     this.assertTrue(true, "first() called");
     this.finish();
   }, this);
-});
+}, {'category':'profile'});
 
 new IN.Test.TestCase("Should run error callback for unexistent field", function(){
   IN.API.Profile("me")
@@ -20,4 +20,4 @@ new IN.Test.TestCase("Should run error callback for unexistent field", function(
       this.assertEquals(400, result.status, "Should return 404 status");
       this.finish();
     }, this);
-});
+}, {'category':'profile'});

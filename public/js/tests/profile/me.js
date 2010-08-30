@@ -1,4 +1,4 @@
-new IN.Test.TestCase("Profile: Should return self when asked for 'me'", function(){
+new IN.Test.TestCase("Should return self when asked for 'me'", function(){
   IN.API.Profile("me")
     .first(function(profile){
       this.assertDefined(profile);
@@ -6,4 +6,4 @@ new IN.Test.TestCase("Profile: Should return self when asked for 'me'", function
       this.assertEquals("Willis",profile.lastName, "Should return last name");
       this.finish();
     },this);
-});
+}, {'category':'profile'});
