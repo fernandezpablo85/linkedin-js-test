@@ -1,4 +1,4 @@
-IN.Test.Cases = ['profile_me', 'profile_custom_fields','profile_handle_errors'];
+IN.Test.Cases = ['profile/me','profile/custom_fields','profile/handle_errors'];
 
 IN.Test.Loader = (function()
 {
@@ -23,8 +23,6 @@ IN.Test.Loader = (function()
       head.appendChild(script);
     }
   }
-  
-  
-  
+
   return that;
 })();
