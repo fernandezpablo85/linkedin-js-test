@@ -1,4 +1,4 @@
-new IN.Test.TestCase("Should return self when asked for 'me'", function(){
+new IN.Test.TestCase("Profile: Should return self when asked for 'me'", function(){
   IN.API.Profile("me")
     .first(function(profile){
       this.assertDefined(profile);

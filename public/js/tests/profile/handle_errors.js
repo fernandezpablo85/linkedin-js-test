@@ -1,4 +1,4 @@
-new IN.Test.TestCase('Should call either error() or first()', function(){
+new IN.Test.TestCase('Profile: Should call either error() or first()', function(){
 
   IN.API.Profile("sfC4Qoby_r")
   .error(function(data){
