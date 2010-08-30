@@ -1,19 +1,15 @@
 new IN.Test.TestCase('Should call either error() or first()', function(){
-  var me = this;
-  var asserts = function(profile)
-  {
-    this.assertTrue(true, "One of the callbacks called");
-    this.finish(); 
-  }
 
   IN.API.Profile("sfC4Qoby_r")
   .error(function(data){
-    asserts(data);
+    this.assertTrue(true, "error() called");
+    this.finish();
   }, this);
   
   IN.API.Profile("sfC4Qoby_r")
   .first(function(data){
-    asserts(data);
+    this.assertTrue(true, "first() called");
+    this.finish();
   }, this);
 });
 
