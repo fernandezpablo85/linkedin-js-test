@@ -21,3 +21,19 @@ new IN.Test.TestCase("Should run error callback for unexistent field", function(
       this.finish();
     }, this);
 }, {'category':'profile'});
+
+new IN.Test.TestCase("Should throw exception if no Id given", function(){
+  try
+  {
+    IN.API.Profile().first(function(result){
+      this.fail("should never call first()");
+    }, this);  
+  }
+  catch(e)
+  {
+    this.assertTrue(true, "Expected exception");
+    this.finish();
+  }
+  
+  
+}, {'category':'profile'});

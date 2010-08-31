@@ -16,7 +16,6 @@ IN.Test.Runner = (function()
       catch(e)
       {
         test.fail("Got exception: " + e);
-        test.finish();
       }
       
     }

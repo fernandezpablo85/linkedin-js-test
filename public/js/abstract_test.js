@@ -24,14 +24,16 @@ IN.Test.AbstractTest = function()
     }
   }
   
-  this.assertDefined = function(object)
+  this.assertDefined = function(object, description)
   {
-    this.assertTrue(typeof object !== "undefined", "object should not be undefined");
+    var desc = description || "object should not be undefined";
+    this.assertTrue(typeof object !== "undefined", desc);
   }
   
   this.fail = function(error)
   {
     this.results.push({'description':error, 'passed': false});
+    this.finish();
   }
   
   this.run = function(test)
@@ -55,7 +57,6 @@ IN.Test.AbstractTest = function()
     if(!this.completed)
     {
       this.fail("Test timed out");  
-      this.finish();
     }
       
   }
