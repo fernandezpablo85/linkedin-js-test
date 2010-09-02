@@ -99,4 +99,5 @@ div.fail h4
 #info .do-not-run
 {
   text-decoration:line-through;
+  color:#AAA;
 }

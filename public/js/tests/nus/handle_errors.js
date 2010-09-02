@@ -1,7 +1,7 @@
 new IN.Test.TestCase('Should only work for the actual user', function(){
   try
   {
-    IN.API.NetworkUpdates("not-me")
+    IN.API.NetworkUpdates("not-me","other-id","more ids").ids('asdf')
     .all(function(data){
       this.fail("should not call all()");
     }, this);  
