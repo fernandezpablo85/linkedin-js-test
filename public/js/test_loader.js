@@ -1,14 +1,23 @@
-IN.Test.Cases = ['profile/basic', 
-                 'profile/me',
-                 'profile/custom_fields',
-                 'profile/handle_errors', 
-                 'connections/basic',
-                 'connections/handle_errors' ,
-                 'connections/my_connections', 
-                 'connections/custom_fields',
-                 'nus/basic',
-                 'nus/my_updates',
-                 'nus/handle_errors'];
+IN.Test.Cases = 
+
+// Profile
+['profile/features',
+'profile/handle_errors', 
+
+// Connections
+'connections/basic',
+'connections/handle_errors' ,
+'connections/my_connections', 
+'connections/custom_fields',
+
+// Network Updates
+'nus/basic',
+'nus/my_updates',
+'nus/handle_errors',
+
+// Member Updates
+
+];
 
 IN.Test.Loader = (function()
 {
