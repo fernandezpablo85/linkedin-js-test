@@ -3,33 +3,50 @@ IN.Test.Display = (function(){
   var _resultList = "#test-results";
   
   var onTestFinished = function(event, response)
-  { 
-    $ul = $('<ul>').addClass('test');
+  {
+    asserts = $('<ul>').addClass('asserts');
     for(var i =0; i < response.results.length; i++)
     {
-      var test = response.results[i];
-      var $li = $('<li>');
-      if(test.passed)
-      {
-        $li.addClass("pass");
-        $li.text(test.description);
-      }
-      else
-      {
-        $li.addClass("fail");
-        var msg = "Failed: " + test.description;
-        if(test.expected)
-        {
-          msg += ". Expected: " + test.expected + " but got: " + test.got;
-        }
-        $li.text(msg);
-      }
-      $ul.append($li);
+      assert_item = createAssertItem(response.results[i]);
+      asserts.append(assert_item);
     }
+    
     $entry = $('<div>').addClass('entry').addClass(response.passed? "pass" : "fail");
-    $($entry).append($('<h4>').text(response.category + ": " + response.name));
-    $($entry).append($ul);
-    $(_resultList).append($entry);
+    $($entry).append($('<h4>').text(response.name));
+    $($entry).append(asserts);
+    var cat_elem_id = '#' + response.category;
+    if($(cat_elem_id).length > 0)
+    {
+      $(cat_elem_id).append($entry);
+    }
+    else
+    {
+      var elt = $("<div>").attr('id', response.category).addClass('category');
+      elt.append($('<h3>').text(response.category));
+      elt.append($entry);
+      $(_resultList).append(elt);
+    }
+  }
+  
+  var createAssertItem = function(assert)
+  {
+    var assert_item = $('<li>');
+    if(assert.passed)
+    {
+      assert_item.addClass("pass");
+      assert_item.text(assert.description);
+    }
+    else
+    {
+      assert_item.addClass("fail");
+      var msg = "Failed: " + assert.description;
+      if(assert.expected)
+      {
+        msg += ". Expected: " + assert.expected + " but got: " + assert.got;
+      }
+      assert_item.text(msg);
+    }
+    return assert_item;
   }
    
   var onTestLoad = function(event, test)
