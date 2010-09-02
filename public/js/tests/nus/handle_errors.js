@@ -1,7 +1,7 @@
-new IN.Test.TestCase('Should only work for the actual user', function(){
+new IN.Test.TestCase('Should fail for any user but the owner', function(){
   try
   {
-    IN.API.NetworkUpdates("not-me","other-id","more ids").ids('asdf')
+    IN.API.NetworkUpdates("not-me")
     .all(function(data){
       this.fail("should not call all()");
     }, this);  
@@ -10,7 +10,20 @@ new IN.Test.TestCase('Should only work for the actual user', function(){
     this.assertTrue(true, "expected exception: " + e);
     this.finish();
   }
-  
+}, {'category':'network-updates'});
+
+new IN.Test.TestCase('Should fail for any user but the owner (multiple ids)', function(){
+  try
+  {
+    IN.API.NetworkUpdates("not-me", "other-id")
+    .all(function(data){
+      this.fail("should not call all()");
+    }, this);  
+  }catch(e)
+  {
+    this.assertTrue(true, "expected exception: " + e);
+    this.finish();
+  }
 }, {'category':'network-updates'});
 
 new IN.Test.TestCase('Should fail for unexistent fields', function(){
