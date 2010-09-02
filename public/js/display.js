@@ -57,11 +57,14 @@ IN.Test.Display = (function(){
     $('#content').show();
   }
   
-  
   that.init = function()
   {
     $(window).bind('test-finished', onTestFinished);
     $(window).bind('test-load', onTestLoad);
+    
+    $('div.category').live('click', function(e){
+      $(this).find('div').toggle();
+    });
   }
   
   return that;
