@@ -11,7 +11,7 @@ IN.Test.Display = (function(){
       asserts.append(assert_item);
     }
     
-    $entry = $('<div>').addClass('entry').addClass(response.passed? "pass" : "fail");
+    $entry = $('<div>').addClass('entry').addClass(response.passed ? "pass" : "fail");
     $($entry).append($('<h4>').text(response.name));
     $($entry).append(asserts);
     var cat_elem_id = '#' + response.category;
@@ -52,7 +52,7 @@ IN.Test.Display = (function(){
   var onTestLoad = function(event, test)
   {
     $content = $('#info');
-    $content.append("<span class='notification'>" + test.category + " - " + test.name + "</span><br/>");
+    $content.append("<span class='notification' data-test-id='"+ test.id +"'>" + test.category + " - " + test.name + "</span><br/>");
     $('#control-panel').show();
     $('#content').show();
   }
@@ -63,7 +63,12 @@ IN.Test.Display = (function(){
     $(window).bind('test-load', onTestLoad);
     
     $('div.category').live('click', function(e){
-      $(this).find('div').toggle();
+      $(this).find('div').toggle('fast');
+    });
+    
+    $('#info .notification').live('click',function(e){
+      $(this).toggleClass('do-not-run')
+      $(window).trigger('test-toggle',{'ignore' : $(this).hasClass('do-not-run'), 'name' : $(this).attr('data-test-id')});
     });
   }
   

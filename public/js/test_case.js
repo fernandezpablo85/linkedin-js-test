@@ -8,6 +8,7 @@ IN.Test.TestCase = function(name, testBody, options)
   this.results = [];
   this.name = name;
   this.doRun = testBody;
+  this.id = IN.$uid();
   $(window).trigger("test-load",this);
 }
 

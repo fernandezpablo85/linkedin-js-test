@@ -62,7 +62,12 @@ ul li.fail
   text-transform:capitalize;
 }
 
-div.fail 
+div h3 
+{
+  padding:10px;
+}
+
+div.fail
 {
   background-color:#EBB;
 }
@@ -85,4 +90,13 @@ div.fail h4
   -webkit-border-radius:15px;
   -moz-border-radius:15px;
   padding:10px;
+}
+
+#info span:hover
+{
+  cursor:pointer;
+}
+#info .do-not-run
+{
+  text-decoration:line-through;
 }
