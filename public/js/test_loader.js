@@ -5,18 +5,16 @@ IN.Test.Cases =
 'profile/handle_errors', 
 
 // Connections
-'connections/basic',
+'connections/features',
 'connections/handle_errors' ,
-'connections/my_connections', 
-'connections/custom_fields',
 
 // Network Updates
-'nus/basic',
-'nus/my_updates',
+'nus/features',
 'nus/handle_errors',
 
 // Member Updates
-
+'member_updates/features',
+'member_updates/handle_errors'
 ];
 
 IN.Test.Loader = (function()

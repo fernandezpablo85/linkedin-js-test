@@ -1,7 +1,7 @@
 new IN.Test.TestCase('Should only work for the actual user', function(){
   try
   {
-    IN.API.NetworkUpdates("not-me")
+    IN.API.MemberUpdates().ids("YdKXpF6myw")
     .all(function(data){
       this.fail("should not call all()");
     }, this);  
@@ -11,10 +11,10 @@ new IN.Test.TestCase('Should only work for the actual user', function(){
     this.finish();
   }
   
-}, {'category':'network-updates'});
+}, {'category':'member-updates'});
 
 new IN.Test.TestCase('Should fail for unexistent fields', function(){
-  IN.API.NetworkUpdates('me')
+  IN.API.MemberUpdates('me')
   .fields('foo', 'bar').all(function(data){
     this.fail("should not call all()");
   }, this).error(function(data){
@@ -22,4 +22,4 @@ new IN.Test.TestCase('Should fail for unexistent fields', function(){
     this.finish();
   },this);  
   
-}, {'category':'network-updates'});
+}, {'category':'member-updates'});
