@@ -5,7 +5,7 @@ new IN.Test.TestCase('Should return custom fields when asked', function(){
     this.assertDefined(profile, "Profile should be defined");
     this.assertEquals("Bruce",profile.firstName, "Should return first name");
     this.assertEquals("Willis",profile.lastName, "Should return last name");
-    this.assertEquals(7, profile.connections._total, "Should return _total attribute");
+    this.assertEquals(3, profile.connections._total, "Should return _total attribute");
     this.finish();
   },this);
   

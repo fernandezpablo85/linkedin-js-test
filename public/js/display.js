@@ -17,7 +17,7 @@ IN.Test.Display = (function(){
       else
       {
         $li.addClass("fail");
-        var msg = "Assertion failed: " + test.description;
+        var msg = "Failed: " + test.description;
         if(test.expected)
         {
           msg += ". Expected: " + test.expected + " but got: " + test.got;

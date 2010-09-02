@@ -10,12 +10,12 @@
   <script src="js/test_case.js"></script>
   <script src="js/test_loader.js"></script>
   <script src="js/test_runner.js"></script>
-  <% server = params[:server] || "qatest216b.qa.linkedin.com:8080" %>
-  <% key = params[:key] || "XiDoIsVy0ZYlKNve4g8h_XY0D1r5t8A-qiv4tFq_R2dDxrkuHzhVn4DHa27fQA-o" %>
+  <% server = params[:server] || "pfernandez-box.linkedin.biz:8080" %>
+  <% key = params[:key] || "consumer_key_1" %>
   <% script_src = "http://#{server}/uas/connect/jsServlet/bootstrap/in.js" %>
   <script type="text/javascript" <%="src='#{script_src}'"%>>
-  api_key: <%=key%>
-  onLoad: IN.Test.onLogin
+	api_key: <%=key%>
+	onLoad: IN.Test.onLogin
   </script>
 </head>
 <body>
@@ -23,6 +23,8 @@
     <div id="login-button">
       <div id="legend">To run the test suite...</div>
       <script type="in/login"></script>
+      <br style="clear:both"/>
+      <a href="https://pfernandez-box.linkedin.biz:8443/leo/secure/">get this machine SSL cert!</a>
       <br style="clear:both"/>
     </div>
     <div id='header'>

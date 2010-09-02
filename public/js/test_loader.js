@@ -1,4 +1,14 @@
-IN.Test.Cases = ['profile/basic', 'profile/me','profile/custom_fields','profile/handle_errors', 'connections/basic','connections/handle_errors' ,'connections/my_connections'];
+IN.Test.Cases = ['profile/basic', 
+                 'profile/me',
+                 'profile/custom_fields',
+                 'profile/handle_errors', 
+                 'connections/basic',
+                 'connections/handle_errors' ,
+                 'connections/my_connections', 
+                 'connections/custom_fields',
+                 'nus/basic',
+                 'nus/my_updates',
+                 'nus/handle_errors'];
 
 IN.Test.Loader = (function()
 {

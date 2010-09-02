@@ -40,6 +40,7 @@ IN.Test.AbstractTest = function()
   {
     var me = this;
     me.results = [];
+    me.completed = false;
     setTimeout(function(){
       me.checkFinished(test);
     }, this.timeout);
@@ -56,7 +57,8 @@ IN.Test.AbstractTest = function()
   {
     if(!this.completed)
     {
-      this.fail("Test timed out");  
+      this.results = [];
+      this.fail("Test timed out. Check the console for errors. (forgot to call finish()?)");  
     }
       
   }
