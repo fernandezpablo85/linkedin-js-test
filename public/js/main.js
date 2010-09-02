@@ -8,6 +8,10 @@ IN.Test.onLogin = function()
 
 IN.Test.init = function()
 {
+  $('#toggle-all').click(function(event){
+     $('#info .notification').click();
+  });
+  
   $('#login-button').fadeOut('slow');
   IN.Test.Display.init();
   IN.Test.Loader.init();
