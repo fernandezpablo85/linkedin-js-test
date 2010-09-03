@@ -4,6 +4,14 @@ IN.Test.Display = (function(){
   
   var onTestFinished = function(event, response)
   {
+    $('#test-totals-completed').text(++$TESTS_RUN);
+    
+    if($TESTS_RUN === +$('#test-totals-total').text())
+    {
+      $('#spinner').hide();
+      $('#run').attr('disabled', '');
+    }
+    
     asserts = $('<ul>').addClass('asserts');
     for(var i =0; i < response.results.length; i++)
     {

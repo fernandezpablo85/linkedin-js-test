@@ -31,6 +31,7 @@ IN.Test.Loader = (function()
   
   function loadTest(event, test)
   {
+    $TESTS_TOTAL++;
     $Tests.push(test);
   }
   

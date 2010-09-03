@@ -1,8 +1,8 @@
 var IN = IN || {};
 IN.Test = IN.Test || {};
 
-$TEST_TOTAL = 0
-$TEST_RUN = 0
+$TESTS_TOTAL = 0
+$TESTS_RUN = 0
 
 IN.Test.onLogin = function()
 {

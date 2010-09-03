@@ -50,6 +50,11 @@ div.entry
   display:none;
 }
 
+div.entry.fail 
+{
+  display:block;
+}
+
 ul li.pass 
 {
   color:green;
@@ -106,8 +111,21 @@ div.fail > h4
 {
   cursor:pointer;
 }
+
 #info .do-not-run
 {
   text-decoration:line-through;
   color:#AAA;
+}
+
+#test-totals
+{
+  display:none;
+  margin:10px;
+  font-size:2em;
+}
+
+#spinner
+{
+  display:none;
 }
