@@ -14,7 +14,15 @@ IN.Test.Cases =
 
 // Member Updates
 'member_updates/features',
-'member_updates/handle_errors'
+'member_updates/handle_errors',
+
+// People Search
+'search/features',
+'search/handle_errors',
+
+// Raw
+'raw/features',
+'raw/handle_errors'
 ];
 
 IN.Test.Loader = (function()
