@@ -40,6 +40,16 @@ body
   cursor:pointer;
 }
 
+div.category
+{
+  width:1200px;
+}
+
+div.entry
+{
+  display:none;
+}
+
 ul li.pass 
 {
   color:green;
@@ -77,7 +87,7 @@ div.fail ul li.pass
   color:black;
 }
 
-div.fail h4
+div.fail > h4
 {
   color:red;
 }

@@ -18,12 +18,14 @@ IN.Test.Display = (function(){
     if($(cat_elem_id).length > 0)
     {
       $(cat_elem_id).append($entry);
+      if($entry.hasClass('fail')) $(cat_elem_id).addClass('fail');
     }
     else
     {
       var elt = $("<div>").attr('id', response.category).addClass('category');
       elt.append($('<h3>').text(response.category));
       elt.append($entry);
+      if($entry.hasClass('fail')) $(cat_elem_id).addClass('fail');
       $(_resultList).append(elt);
     }
   }
