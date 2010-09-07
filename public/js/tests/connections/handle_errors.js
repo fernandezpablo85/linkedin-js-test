@@ -1,9 +1,8 @@
 new IN.Test.TestCase('Should throw exception if given multiple ids', function(){
   try
   {
-    IN.API.Connections("id1","id2").all(function(data){
-      //should never reach here
-      assertFail("should not call all()");
+    IN.API.Connections("id1","id2").result(function(data){
+      assertFail("should not call result()");
     });  
   }
   catch(e)
@@ -17,8 +16,7 @@ new IN.Test.TestCase('Should throw exception if given multiple ids', function(){
 new IN.Test.TestCase('Should throw exception if no Id provided', function(){
   try
   {
-    IN.API.Connections().all(function(data){
-      //should never reach here
+    IN.API.Connections().result(function(data){
       assertFail("should not call all()");
     });  
   }
