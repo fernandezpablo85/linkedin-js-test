@@ -32,8 +32,11 @@ IN.Test.AbstractTest = function()
   
   this.fail = function(error)
   {
-    this.results.push({'description':error, 'passed': false});
-    this.finish();
+    if(this.completed == false)
+    {
+      this.results.push({'description':error, 'passed': false});
+      this.finish();      
+    }
   }
   
   this.run = function(test)
@@ -65,8 +68,11 @@ IN.Test.AbstractTest = function()
   
   this.finish = function()
   {
-    this.completed = true;
-    $(window).trigger("test-finished", {'category': this.category, 'name': this.name, 'results': this.results , 'passed': !this.hasErrors()});
+    if(this.completed == false)
+    {
+      this.completed = true;
+      $(window).trigger("test-finished", {'category': this.category, 'name': this.name, 'results': this.results , 'passed': !this.hasErrors()});
+    }
   }
   
   this.hasErrors = function()
