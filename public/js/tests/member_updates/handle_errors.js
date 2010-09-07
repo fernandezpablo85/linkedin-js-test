@@ -1,10 +1,10 @@
 new IN.Test.TestCase('Should fail for unexistent fields', function(){
   IN.API.MemberUpdates('me')
-  .fields('foo', 'bar').all(function(data){
-    this.fail("should not call all()");
+  .fields('foo', 'bar').result(function(data){
+    this.fail("should not call result()");
   }, this).error(function(data){
-    this.assertTrue(true, "called error()");  
+    this.assertTrue(true, "Called error()");
     this.finish();
-  },this);  
+  }, this);
   
 }, {'category':'member-updates'});

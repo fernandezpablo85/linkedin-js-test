@@ -1,4 +1,4 @@
-new IN.Test.TestCase('Should call either error() or first()', function(){
+new IN.Test.TestCase('Should call either error() or result()', function(){
 
   IN.API.Profile("sfC4Qoby_r")
   .error(function(data){
@@ -7,8 +7,8 @@ new IN.Test.TestCase('Should call either error() or first()', function(){
   }, this);
   
   IN.API.Profile("sfC4Qoby_r")
-  .first(function(data){
-    this.assertTrue(true, "first() called");
+  .result(function(data){
+    this.assertTrue(true, "result() called");
     this.finish();
   }, this);
 }, {'category':'profile'});
@@ -25,7 +25,7 @@ new IN.Test.TestCase("Should run error callback for unexistent field", function(
 new IN.Test.TestCase("Should throw exception if no Id given", function(){
   try
   {
-    IN.API.Profile().first(function(result){
+    IN.API.Profile().result(function(result){
       this.fail("should never call first()");
     }, this);  
   }

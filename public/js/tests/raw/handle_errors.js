@@ -2,8 +2,8 @@ new IN.Test.TestCase('Should fail for any user but the owner', function(){
   try
   {
     IN.API.PeopleSearch("not-me")
-    .all(function(data){
-      this.fail("should not call all()");
+    .result(function(data){
+      this.fail("should not call result()");
     }, this);  
   }catch(e)
   {
@@ -16,8 +16,8 @@ new IN.Test.TestCase('Should fail for any user but the owner (multiple ids)', fu
   try
   {
     IN.API.PeopleSearch("not-me", "other-id")
-    .all(function(data){
-      this.fail("should not call all()");
+    .result(function(data){
+      this.fail("should not call result()");
     }, this);  
   }catch(e)
   {
@@ -28,9 +28,11 @@ new IN.Test.TestCase('Should fail for any user but the owner (multiple ids)', fu
 
 new IN.Test.TestCase('Should fail for unexistent fields', function(){
   IN.API.PeopleSearch()
-  .fields('foo', 'bar').all(function(data){
-    this.fail("should not call all()");
-  }, this).error(function(data){
+  .fields('foo', 'bar')
+  .result(function(data){
+    this.fail("should not call result()");
+  }, this)
+  .error(function(data){
     this.assertTrue(true, "called error()");  
     this.finish();
   },this);  

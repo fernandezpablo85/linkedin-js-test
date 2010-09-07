@@ -7,10 +7,10 @@ new IN.Test.TestCase('Should return basic values', function(){
 new IN.Test.TestCase("Should perform search using fields()", function(){
   IN.API.PeopleSearch().params({
     "industry": "Marketing and Advertising"}).
-    all(function(profile){
-      this.assertDefined(profile, "Profile should be defined");
-      this.assertEquals("Bruce",profile.firstName, "Should return first name");
-      this.assertEquals("Willis",profile.lastName, "Should return last name");
+    result(function(profile){
+      this.assertDefined(profile.values, "Profile should be defined");
+      this.assertEquals("Bruce",profile.values[0].firstName, "Should return first name");
+      this.assertEquals("Willis",profile.values[0].lastName, "Should return last name");
       this.finish();
     },this);
 }, {'category':'people-search'});

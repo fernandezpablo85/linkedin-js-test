@@ -6,7 +6,7 @@ new IN.Test.TestCase('Should return basic values', function(){
 
 new IN.Test.TestCase('Should be able to make raw calls to profile', function(){
   IN.API.Raw("people/~").
-    all(function(profile){
+    result(function(profile){
       this.assertTrue(true, "Call succeeded")
       this.finish();
     },this);
@@ -14,7 +14,7 @@ new IN.Test.TestCase('Should be able to make raw calls to profile', function(){
 
 new IN.Test.TestCase("Should be able to make raw calls to connections", function(){
   IN.API.Raw("people/~/connections").
-    all(function(profile){
+    result(function(profile){
       this.assertTrue(true, "Call succeeded")
       this.finish();
     },this);
@@ -22,7 +22,7 @@ new IN.Test.TestCase("Should be able to make raw calls to connections", function
 
 new IN.Test.TestCase('Should be able to make raw calls with field selectors', function(){
   IN.API.Raw("people/~/connections:(first-name,last-name)").
-    all(function(profile){
+    result(function(profile){
       this.assertTrue(true, "Call succeeded")
       this.finish();
     },this);  
