@@ -4,7 +4,7 @@ IN.Test.TestCase = function(name, testBody, options)
   
   this.completed = false;
   this.category = opts.category || "default";
-  this.timeout = 5000;
+  this.timeout = 10000;
   this.results = [];
   this.name = name;
   this.doRun = testBody;
