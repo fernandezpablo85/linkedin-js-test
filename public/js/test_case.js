@@ -1,15 +1,15 @@
-IN.Test.TestCase = function(name, testBody, options)
-{
-  var opts = options || {};
-  
-  this.completed = false;
-  this.category = opts.category || "default";
-  this.timeout = 10000;
-  this.results = [];
-  this.name = name;
-  this.doRun = testBody;
-  this.id = IN.$uid();
-  $(window).trigger("test-load",this);
-}
+IN.Test = IN.Test || {};
+IN.Test.Suites = [];
 
-IN.Test.TestCase.prototype = new IN.Test.AbstractTest();
+IN.Test.TestSuite = function(suiteName, tests)
+{   
+  var suite = new YAHOO.tool.TestSuite(suiteName);
+  
+  for(var i in tests){
+    var yTest = new YAHOO.tool.TestCase(tests[i]);
+    suite.add(yTest);
+  }
+  
+  IN.Test.Suites.push(suite);
+  $(window).trigger("suite-loaded", suite);
+}
