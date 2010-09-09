@@ -21,7 +21,8 @@ IN.Test.Controls.suiteResults = function(result)
   {
     var key = suite.items[i].name;
     var testResult = result.results[key];
-    ul.append($('<li>').text(testResult.name));
+    var clazz = result.results[key].failed > 0 ? "fail" : "pass";
+    ul.append($('<li>').text(testResult.name).addClass(clazz));
   }
   div.append(ul);
   return div;

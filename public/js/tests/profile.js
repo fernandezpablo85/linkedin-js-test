@@ -117,7 +117,7 @@ new IN.Test.TestSuite('PROFILE',[
    
    testApiResourceAndName: function()
    {
-     YAHOO.util.Assert.areEqual("people.get", 
+     YAHOO.util.Assert.areEqual("people.geta", 
                                  IN.API.Profile("me").name(), "Wrong API name");
                                  
      YAHOO.util.Assert.areEqual("/people::({IDS}){ISPUBLIC}:({FIELDS})", 
