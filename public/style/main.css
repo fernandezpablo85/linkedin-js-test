@@ -1,3 +1,4 @@
+/*********  General  ************/
 #main > *
 {
   margin:10px;
@@ -12,6 +13,7 @@ body
   font-family:"Droid Sans";
 }
 
+/*********  Top Div (Login with LinkedIn)  ************/
 #legend
 {
   font-family:"Reenie Beanie";
@@ -24,11 +26,13 @@ body
   float:left;
 }
 
+/*********  Content  ************/
 #content
 {
   display:none;
 }
 
+/*********  Content => Control Panel  ************/
 #run
 {
   margin:10px;
@@ -40,14 +44,15 @@ body
   cursor:pointer;
 }
 
-div.category
+/*********  Content => Results  ************/
+#test-results div
 {
-  width:1200px;
-}
-
-div.entry.fail 
-{
-  display:block;
+  border:1px solid gray;
+  -webkit-border-radius:15px;
+  -moz-border-radius:15px;
+  padding:5px;
+  margin:10px 0px;
+  text-transform:capitalize;
 }
 
 ul li.pass 
@@ -62,16 +67,6 @@ ul li.fail
   list-style-image:url(../img/cancel.png);
 }
 
-#test-results div
-{
-  border:1px solid gray;
-  -webkit-border-radius:15px;
-  -moz-border-radius:15px;
-  padding:5px;
-  margin:10px 0px;
-  text-transform:capitalize;
-}
-
 div h3 
 {
   padding:10px;
@@ -82,15 +77,12 @@ div.fail
   background-color:#EBB;
 }
 
-div.fail ul li.pass
-{
-  color:black;
-}
-
 div.fail > h4
 {
   color:red;
 }
+
+/*********  Content => Info panel (Tests Loaded)  ************/
 
 #info 
 {
