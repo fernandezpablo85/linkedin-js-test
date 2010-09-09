@@ -12,18 +12,34 @@ IN.Test.Controls.panelEntry = function(suite)
 
 IN.Test.Controls.suiteResults = function(result)
 {
+  var getTestInfo = function(index, result)
+  {
+    var suite = result.testSuite;
+    return {'info': suite.items[index], 'result': result.results[suite.items[index].name]}
+  }
+  
+  var appendTest = function(test, parent)
+  {
+    for(var prop in test.result)
+    {
+      if(!prop.match(/^test(.*)/)) continue;
+      var test = test.result[prop];
+      parent.append($('<li>').text(test.name + ": " + test.message).addClass(test.result));
+    }
+  };
+  
   var suite = result.testSuite;
   var clazz = (result.results.failed > 0) ? "fail" : "pass";
   var div = $("<div>").addClass('entry').addClass(clazz);
   div.append($('<h4>').text(suite.name));
-  var ul = $('<ul/>')
+  var list = $('<ul/>');
+  
   for(var i in suite.items)
   {
-    var key = suite.items[i].name;
-    var testResult = result.results[key];
-    var clazz = result.results[key].failed > 0 ? "fail" : "pass";
-    ul.append($('<li>').text(testResult.name).addClass(clazz));
+    var test = getTestInfo(i, result);
+    appendTest(test, list);
   }
-  div.append(ul);
+  
+  div.append(list);
   return div;
 }

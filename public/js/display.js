@@ -12,7 +12,6 @@ IN.Test.Display = (function(){
   {
     var panelEntry = IN.Test.Controls.panelEntry(suite);
     $('#info').append(panelEntry);
-    
     $('#control-panel').show();
     $('#content').show();
   }
