@@ -45,11 +45,6 @@ div.category
   width:1200px;
 }
 
-div.entry
-{
-  display:none;
-}
-
 div.entry.fail 
 {
   display:block;
@@ -105,27 +100,4 @@ div.fail > h4
   -webkit-border-radius:15px;
   -moz-border-radius:15px;
   padding:10px;
-}
-
-#info span:hover
-{
-  cursor:pointer;
-}
-
-#info .do-not-run
-{
-  text-decoration:line-through;
-  color:#AAA;
-}
-
-#test-totals
-{
-  display:none;
-  margin:10px;
-  font-size:2em;
-}
-
-#spinner
-{
-  display:none;
 }
