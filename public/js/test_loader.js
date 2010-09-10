@@ -1,7 +1,7 @@
 IN.Test.Cases = 
 
 // Profile
-['profile', 'connections'] 
+['profile', 'connections', 'network_updates'] 
 
 IN.Test.Loader = (function()
 {
