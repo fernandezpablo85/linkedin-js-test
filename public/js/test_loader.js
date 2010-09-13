@@ -7,7 +7,6 @@ IN.Test.Loader = (function()
 {
   var that = {};
   
-  
   that.init = function()
   { 
     var tests = IN.Test.Cases.length;
