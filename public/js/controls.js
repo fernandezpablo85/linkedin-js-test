@@ -18,13 +18,16 @@ IN.Test.Controls.suiteResults = function(result)
     return {'info': suite.items[index], 'result': result.results[suite.items[index].name]}
   }
   
-  var appendTest = function(test, parent)
+  var appendTest = function(data, parent)
   {
-    for(var prop in test.result)
+    for(var prop in data.result)
     {
       if(!prop.match(/^test(.*)/)) continue;
-      var test = test.result[prop];
-      parent.append($('<li>').text(test.name + ": " + test.message).addClass(test.result));
+      var testName = data.info.name;
+      var testDescription = data.info.description || "please add description to the test";
+      var testResult = data.result[prop].result;
+      var testMessage = data.result[prop].message;
+      parent.append($('<li>').text(testName + ": " + testMessage).addClass(testResult).attr('title',testDescription));
     }
   };
   
