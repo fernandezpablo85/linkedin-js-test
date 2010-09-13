@@ -1,6 +1,7 @@
 new IN.Test.TestSuite('NUS',[
 {
-  name: 'Get api properties',
+  name: "API",
+  description: "Retrieve basic values from the Prfole() API object",
   
   testGetResourceAndName: function()
   {
@@ -9,7 +10,8 @@ new IN.Test.TestSuite('NUS',[
   }
 },
 {
-  name: 'Get my updates',
+  name: "SELF",
+  description: "Get the caller's (me) updates",
   
   testGetMyUpdates: function()
   {
@@ -26,7 +28,8 @@ new IN.Test.TestSuite('NUS',[
   }
 },
 {
-  name: 'Get my updates with field selectors',
+  name: "FS",
+  description: "Get the caller's updates using field selectors",
   
   testGetMyUpdatesWithFieldSelectors:function()
   {
@@ -38,14 +41,15 @@ new IN.Test.TestSuite('NUS',[
           Assert.isNotUndefined(data.values, "Must return updates");
           Assert.isNotUndefined(data.values[0].updateType, "Must return requested field");
           Assert.isUndefined(data.values[0].updateContent, "Must not return fields not requested");
-      });
-    }, this);
+        });
+      }, this);
       
     this.wait();
   }
 },
 {
-  name: 'Should fail when requesting others updates',
+  name: "OTHER-ID",
+  description: "Get the network updates passing other memeber id to force a local error",
   
   _should:{
     error:{
@@ -56,12 +60,13 @@ new IN.Test.TestSuite('NUS',[
   testShouldFailForOthersUpdates:function()
   {
     IN.API.NetworkUpdates("not-me").result(function(data){
-      YAHOO.util.Assert.fail();
+      YAHOO.util.Assert.fail("Should not call result()");
     }, this);
   }
 },
 {
-  name: 'Should fail for many Ids',
+  name: "MANY-IDS",
+  description: "Get the network updates passing many member ids to force a local error",
   
   _should:{
     error:{
@@ -77,16 +82,15 @@ new IN.Test.TestSuite('NUS',[
   } 
 },
 {
-  name: 'Should fail for unexistent fields',
+  name: "FS-ERR",
+  description: "Get the caller's network updates with wrong field selectors to force an API error",
   
   testShouldCallErrorForUnexistentFields:function()
   {
-    IN.API.NetworkUpdates('me')
-    .fields('foo', 'bar')
+    IN.API.NetworkUpdates('me').fields('foo', 'bar')
     .error(function(data){
-      this.resume(function(){
-        // called error()
-      });
+      // should call error()
+      this.resume($.noop);
     },this);
     
     this.wait();

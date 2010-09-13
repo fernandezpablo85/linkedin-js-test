@@ -1,15 +1,19 @@
 new IN.Test.TestSuite('MEMBER',[
 {
-  name: 'Should return basic values',
+  name: "API",
+  description: "Retrieve basic values from the Prfole() API object",
   
   testGetApiNameAndResource: function()
   {
-    YAHOO.util.Assert.areEqual('memberupdates.get', IN.API.MemberUpdates('me').name());
-    YAHOO.util.Assert.areEqual('/people/{IDS}/network/updates:({FIELDS})', IN.API.MemberUpdates('me').resource());
+    var Assert = YAHOO.util.Assert;
+    
+    Assert.areEqual('memberupdates.get', IN.API.MemberUpdates('me').name());
+    Assert.areEqual('/people/{IDS}/network/updates:({FIELDS})', IN.API.MemberUpdates('me').resource());
   }
 },
 {
-  name: 'Get my member updates',
+  name: "SELF",
+  description: "Get the caller's (me) member updates",
   
   testGetMyMemberUpdates: function()
   {
@@ -26,7 +30,8 @@ new IN.Test.TestSuite('MEMBER',[
   }
 },
 {
-  name: 'Get my updates with field selectors',
+  name: "FS",
+  description: "Get the caller's member updates using field selectors",
   
   testGetMyMemberUpdatesWithSelectors: function()
   {
@@ -45,15 +50,15 @@ new IN.Test.TestSuite('MEMBER',[
   }
 },
 {
-  name: 'Should fail for unexistent fields',
+  name: "FS-ERR",
+  description: "Get the caller's memeber updates using wrong field selectors to force an API error",
   
   testGetMemberUpdatesWithWrongFields: function()
   {
     IN.API.MemberUpdates('me').fields('foo', 'bar')
       .error(function(data){
-        this.resume(function(){
-          // called error() :)
-        });
+        // should call error()
+        this.resume($.noop());
       }, this);
     
     this.wait();  

@@ -1,16 +1,18 @@
 new IN.Test.TestSuite('SEARCH',[
 {
-  name: 'Basic api properties',
+  name: "API",
+  description: "Retrieve basic values from the Prfole() API object",
   
   testGetApiNameAndResource: function()
   {
-    YAHOO.util.Assert.areEqual("peoplesearch.get", IN.API.PeopleSearch().name(), "Wrong API name");
-    YAHOO.util.Assert.areEqual("/people-search:(people:({FIELDS}),num-results)", 
-                              IN.API.PeopleSearch().resource(), "Wrong API resource");
+    var Assert = YAHOO.util.Assert;
+    Assert.areEqual("peoplesearch.get", IN.API.PeopleSearch().name(), "Wrong API name");
+    Assert.areEqual("/people-search:(people:({FIELDS}),num-results)", IN.API.PeopleSearch().resource(), "Wrong API resource");
   }
 },
 {
-  name: 'Should perform search using fields()',
+  name: "BASIC",
+  description: "Perform a basic search using custom params",
   
   testShouldSearchWithFields: function()
   {
@@ -22,11 +24,13 @@ new IN.Test.TestSuite('SEARCH',[
           Assert.isNotUndefined(data, "Should not return undefined");
         });
       }, this);
+      
     this.wait();
   }
 },
 {
-  name: "Should fail if given user param",
+  name: "ID-ERR",
+  description: "Perform a search passing a member id to force a local error",
   
   _should:{
     error:{
@@ -44,20 +48,22 @@ new IN.Test.TestSuite('SEARCH',[
   }
 },
 {
-  name: 'Should fail for unexistent fields',
+  name: "FS-ERR",
+  description: "Perform a search with wrong fields to force an API error",
   
   testShouldFailForUnexistentFields:function()
   {
     IN.API.PeopleSearch().fields('foo', 'bar').error(function(data){
-      this.resume(function(){
-        //called error()
-      });
+      //should call error()
+      this.resume($.noop());
     }, this);
+    
     this.wait();
   }
 },
 {
-  name: 'Exploration test for parameters',
+  name: "PARAM-ERR",
+  description: "Perform a search passing strings as parameters to force a local error",
   
   _should:{
    ignore:{
@@ -67,52 +73,9 @@ new IN.Test.TestSuite('SEARCH',[
   
   testThis:function()
   {
-    IN.API.PeopleSearch().params('foo', 'bar').error(function(data){
-      this.resume(function(){
-        //called error()
-      });
+    IN.API.PeopleSearch().params('foo', 'bar').result(function(data){
+      YAHOO.util.Assert.fail("Should not call result()");
     }, this);
-    this.wait();
   }
 }
 ]);
-
-/*
-new IN.Test.TestCase('Should return custom fields when asked', function(){
-  IN.API.Profile("me")
-  .fields("firstName", "lastName", "connections")
-  .first(function(profile){
-    this.assertDefined(profile, "Profile should be defined");
-    this.assertEquals("Bruce",profile.firstName, "Should return first name");
-    this.assertEquals("Willis",profile.lastName, "Should return last name");
-    this.assertEquals(3, profile.connections._total, "Should return _total attribute");
-    this.finish();
-  },this);
-  
-}, {'category':'people-search'});
-
-
-new IN.Test.TestCase('Should fail for any user but the owner (multiple ids)', function(){
-  try
-  {
-    IN.API.PeopleSearch("not-me", "other-id")
-    .result(function(data){
-      this.fail("should not call result()");
-    }, this);  
-  }catch(e)
-  {
-    this.assertTrue(true, "expected exception: " + e);
-    this.finish();
-  }
-}, {'category':'people-search'});
-
-new IN.Test.TestCase('Should fail for unexistent fields', function(){
-  IN.API.PeopleSearch()
-  .fields('foo', 'bar').result(function(data){
-    this.fail("should not call result()");
-  }, this).error(function(data){
-    this.assertTrue(true, "called error()");  
-    this.finish();
-  },this);  
-  
-}, {'category':'people-search'});*/

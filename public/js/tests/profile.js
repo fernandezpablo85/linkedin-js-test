@@ -82,7 +82,7 @@ new IN.Test.TestSuite('PROFILE',[
   testErrWhenMemberIdNotFound: function()
   {
     IN.API.Profile("not-found").error(function(data){
-      // should call error
+      // should call error()
       this.resume($.noop());
     }, this);  
     
