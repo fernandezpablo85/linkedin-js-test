@@ -21,6 +21,16 @@ IN.Test.Display = (function(){
     var TestRunner = YAHOO.tool.TestRunner;
     TestRunner.subscribe(TestRunner.TEST_SUITE_COMPLETE_EVENT, onTestSuiteFinished);
     $(window).bind('suite-loaded', onSuiteLoad);
+    
+    // Show / hide description and code
+    
+    $('#test-results li.result').live('click',function(event){
+      $(event.target).next().toggle();
+    });
+    
+    $('#test-results li.description a').live('click',function(event){
+      $(event.target).parent().next().toggle();
+    });
   }
   
   return that;

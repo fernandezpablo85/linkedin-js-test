@@ -3,16 +3,22 @@
   <title>LinkedIn Connect Testing Framework</title>
   <link href="style/main.css" rel="stylesheet" />
   <link href='http://fonts.googleapis.com/css?family=Reenie+Beanie|Droid+Sans' rel='stylesheet'>
+  <!-- jQuery -->
   <script  type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  
+  <!-- YUI Testing Framework -->
   <script src="http://yui.yahooapis.com/2.8.1/build/yahoo-dom-event/yahoo-dom-event.js"></script>
   <script src="http://yui.yahooapis.com/2.8.1/build/logger/logger-min.js"></script>
   <script src="http://yui.yahooapis.com/2.8.1/build/yuitest/yuitest-min.js"></script>
+    
+  <!-- Connect Testing Framework -->
   <script src="js/main.js"></script>
   <script src="js/controls.js"></script>
   <script src="js/display.js"></script>
   <script src="js/test_suite.js"></script>
   <script src="js/test_loader.js"></script>
   <script src="js/test_runner.js"></script>
+
   <% server = params[:server] || "pfernandez-box.linkedin.biz:8080" %>
   <% key = params[:key] || "consumer_key_2" %>
   <% script_src = "http://#{server}/uas/connect/jsServlet/bootstrap/in.js" %>

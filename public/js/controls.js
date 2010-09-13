@@ -20,6 +20,13 @@ IN.Test.Controls.suiteResults = function(result)
   
   var appendTest = function(data, parent)
   {
+    var getTestCode = function(data)
+    {
+      for(prop in data.info)
+      {
+        if(prop.match(/^test(.*)/)) return data.info[prop].toString();
+      }
+    }
     for(var prop in data.result)
     {
       if(!prop.match(/^test(.*)/)) continue;
@@ -27,7 +34,10 @@ IN.Test.Controls.suiteResults = function(result)
       var testDescription = data.info.description || "please add description to the test";
       var testResult = data.result[prop].result;
       var testMessage = data.result[prop].message;
-      parent.append($('<li>').text(testName + ": " + testMessage).addClass(testResult).attr('title',testDescription));
+      parent.append($('<li>').text(testName + ": " + testMessage).addClass(testResult).addClass('result'));
+      parent.append($('<li>').html(testDescription + '<a href="#">source</a>').addClass("description"));
+      var code = $('<code>').html(getTestCode(data));
+      parent.append($('<li>').append(code).addClass('code'));
     }
   };
   

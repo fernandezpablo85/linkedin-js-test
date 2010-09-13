@@ -81,6 +81,43 @@ div.fail > h4
   color:red;
 }
 
+/****** Content => Results => Description show/hide ***********/
+ul li.result:hover 
+{
+  cursor:pointer;
+}
+
+ul li.description
+{
+  display:none;
+  list-style:none;
+  padding: 10px;
+  margin:10px;
+  background-color:#FFD;
+  width:600px;
+}
+
+ul li.description a
+{
+  float:right;
+  text-decoration:none;
+}
+
+ul li.description a:hover
+{
+  text-decoration:underline;
+}
+ul li.code
+{
+  display:none;
+  list-style:none;
+  padding: 10px;
+  margin:10px;
+  background-color:#FFD;
+  width:600px;
+}
+
+
 /*********  Content => Info panel (Tests Loaded)  ************/
 
 #info 

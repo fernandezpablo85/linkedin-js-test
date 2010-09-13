@@ -1,7 +1,7 @@
 new IN.Test.TestSuite('PROFILE',[
 {
   name: "SELF",
-  description: "Get the caller's ('me') profile",
+  description: "Get the caller's (me) profile",
 
   testGetMyProfile: function()
   {
