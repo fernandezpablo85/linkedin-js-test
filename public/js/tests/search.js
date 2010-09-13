@@ -48,6 +48,25 @@ new IN.Test.TestSuite('SEARCH',[
   
   testShouldFailForUnexistentFields:function()
   {
+    IN.API.PeopleSearch().fields('foo', 'bar').error(function(data){
+      this.resume(function(){
+        //called error()
+      });
+    }, this);
+    this.wait();
+  }
+},
+{
+  name: 'Exploration test for parameters',
+  
+  _should:{
+   ignore:{
+     testThis:true
+   } 
+  },
+  
+  testThis:function()
+  {
     IN.API.PeopleSearch().params('foo', 'bar').error(function(data){
       this.resume(function(){
         //called error()
