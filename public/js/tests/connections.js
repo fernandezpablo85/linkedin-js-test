@@ -22,7 +22,9 @@ new IN.Test.TestSuite('CONN',[
     IN.API.Connections("me").result(function(result){
       this.resume(function(){
         Assert.isNotUndefined(result.values, "Results should be defined");
-        Assert.areEqual(3, result._total, "Should return connection totals");
+        Assert.isString(result.values[0].firstName, "Should return first name");
+        Assert.isString(result.values[0].lastName, "Should return last name");
+        Assert.isNumber(result._total, "Should return connection totals");
       });
     }, this);
     
@@ -41,7 +43,7 @@ new IN.Test.TestSuite('CONN',[
       .result(function(connections){
         this.resume(function(){
           Assert.isNotUndefined(connections.values, "Connections should be defined");
-          Assert.isNotUndefined(connections.values[0].firstName, "Must bring firstName");
+          Assert.isString(connections.values[0].firstName, "Must bring firstName");
           Assert.isUndefined(connections.values[0].headline, "Must not bring headline");    
         });
       },this);
