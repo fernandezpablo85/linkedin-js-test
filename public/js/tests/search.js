@@ -66,12 +66,12 @@ new IN.Test.TestSuite('SEARCH',[
   description: "Perform a search passing strings as parameters to force a local error",
   
   _should:{
-   ignore:{
-     testThis:true
-   } 
+    error:{
+      testShouldFailForStringsAsParams:true
+    }
   },
   
-  testThis:function()
+  testShouldFailForStringsAsParams:function()
   {
     IN.API.PeopleSearch().params('foo', 'bar').result(function(data){
       YAHOO.util.Assert.fail("Should not call result()");
