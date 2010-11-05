@@ -19,13 +19,8 @@
   <script src="js/test_loader.js"></script>
   <script src="js/test_runner.js"></script>
 
-  <% server = params[:server] || "pfernandez-box.linkedin.biz:8080" %>
-  <% key = params[:key] || "consumer_key_2" %>
-  <% script_src = "http://#{server}/uas/connect/jsServlet/bootstrap/in.js" %>
-  <script type="text/javascript" <%="src='#{script_src}'"%>>
-	api_key: <%=key%>
-	onLoad: IN.Test.onLogin
-  </script>
+  <%= connect_tag :server => 'localhost:8080', :key => "consumer_key_2" %>
+
 </head>
 <body>
   <div id='main'>
