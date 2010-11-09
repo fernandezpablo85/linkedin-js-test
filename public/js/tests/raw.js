@@ -35,15 +35,14 @@ new IN.Test.TestSuite('RAW',[
   testShouldPerformRawPost: function()
   {
     var Assert = YAHOO.util.Assert;
-    var INVITE_BODY = {'invitation': {
-                        'to':{
+    var INVITE_BODY = {'to':{
                           'fist-name': 'Bruce',
                           'last-name': 'Willis',
                           'email-address': 'bruce@test.linkedin.com'
                         },
                         'subjet':'Invitation to my network',
                         'body': 'I would like to add you to my professional network on LinkedIn.'
-                      }};
+                      };
     IN.API.Raw("/people/~/mailbox/invitations")
           .method("POST")
           .body(JSON.stringify(INVITE_BODY))
@@ -68,16 +67,16 @@ new IN.Test.TestSuite('RAW',[
   testShouldFailForUnexistentFields:function()
   {
     var Assert = YAHOO.util.Assert;
-    var STATUS_BODY = {'current-status': 'Testing javascript API'};
+    var STATUS_BODY = "\"Testing javascript API\""
   
     IN.API.Raw('/people/~/current-status')
       .method("PUT")
-      .body(JSON.stringify(STATUS_BODY))
+      .body(STATUS_BODY)
       .result(function(data){
         this.resume(function(){
           console.log(data);
         });
-      })
+      }, this)
       .error(function(data){
         this.resume(function(){
           Assert.fail("Not 2xx response");  
