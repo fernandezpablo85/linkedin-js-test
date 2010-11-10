@@ -64,7 +64,7 @@ new IN.Test.TestSuite('RAW',[
   name: "PUT",
   description: "Perform a raw PUT request",
   
-  testShouldFailForUnexistentFields:function()
+  testShouldPerformRawPut:function()
   {
     var Assert = YAHOO.util.Assert;
     var STATUS_BODY = "\"Testing javascript API\""
