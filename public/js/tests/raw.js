@@ -45,8 +45,7 @@ new IN.Test.TestSuite('RAW',[
           .body(JSON.stringify(BODY))
           .result(function(response){
             this.resume(function(){
-              console.log("post activity worked!");
-              console.log(response);
+              //passed
             });
           }, this)
           .error(function(response){
@@ -79,8 +78,7 @@ new IN.Test.TestSuite('RAW',[
           .body(JSON.stringify(BODY))
           .result(function(response){
             this.resume(function(){
-              console.log("share link worked!");
-              console.log(response);
+              //passed
             });
           }, this)
           .error(function(response){
@@ -105,8 +103,7 @@ new IN.Test.TestSuite('RAW',[
       .body(STATUS_BODY)
       .result(function(data){
         this.resume(function(){
-          console.log('status update');
-          console.log(data);
+          //passed
         });
       }, this)
       .error(function(data){
