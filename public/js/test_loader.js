@@ -1,4 +1,6 @@
-IN.Test.Cases = ['profile', 'connections', 'network_updates', 'member_updates', 'search', 'raw'] 
+//IN.Test.Cases = ['profile', 'connections', 'network_updates', 'member_updates', 'search', 'raw'] 
+
+IN.Test.Cases = ['raw'];
 
 IN.Test.Loader = (function()
 {

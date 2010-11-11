@@ -30,25 +30,56 @@ new IN.Test.TestSuite('RAW',[
 },
 {
   name: "POST",
-  description: "Perform a raw POST request",
+  description: "Perform a raw POST activity update",
   
-  testShouldPerformRawPost: function()
+  testShouldPerformRawActivityUpdate: function()
   {
     var Assert = YAHOO.util.Assert;
-    var INVITE_BODY = {'to':{
-                          'fist-name': 'Bruce',
-                          'last-name': 'Willis',
-                          'email-address': 'bruce@test.linkedin.com'
-                        },
-                        'subjet':'Invitation to my network',
-                        'body': 'I would like to add you to my professional network on LinkedIn.'
-                      };
-    IN.API.Raw("/people/~/mailbox/invitations")
+    var BODY = {
+                  'content-type':'linkedin-html',
+                  'body':'hurray!'
+               };
+    
+    IN.API.Raw("/people/~/person-activities")
           .method("POST")
-          .body(JSON.stringify(INVITE_BODY))
+          .body(JSON.stringify(BODY))
           .result(function(response){
             this.resume(function(){
-              console.log("worked!");
+              console.log("post activity worked!");
+              console.log(response);
+            });
+          }, this)
+          .error(function(response){
+            this.resume(function(){
+              Assert.fail("Not 2xx response");
+            });
+          }, this);
+    this.wait();
+  }
+},
+{
+  name: "POST",
+  description: "Perform a raw POST share request",
+  
+  testShouldPerformRawShare: function()
+  {
+    var Assert = YAHOO.util.Assert;
+    var BODY =  {
+                  "content": {
+                    "submitted-url": "http://www.google.com",
+                    "title": "this search engine is neat",
+                  },
+                  "visibility": {"code": "anyone"},
+                  "comment": "nice link"
+                }
+    
+    
+    IN.API.Raw("/people/~/shares")
+          .method("POST")
+          .body(JSON.stringify(BODY))
+          .result(function(response){
+            this.resume(function(){
+              console.log("share link worked!");
               console.log(response);
             });
           }, this)
@@ -74,6 +105,7 @@ new IN.Test.TestSuite('RAW',[
       .body(STATUS_BODY)
       .result(function(data){
         this.resume(function(){
+          console.log('status update');
           console.log(data);
         });
       }, this)
