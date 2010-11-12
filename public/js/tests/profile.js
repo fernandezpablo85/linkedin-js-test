@@ -77,12 +77,11 @@ new IN.Test.TestSuite('PROFILE',[
 },
 {
   name: "WRONG-ID",
-  description: "Get a profile providing a wrong id to force an API error",
+  description: "Get a profile providing a non existent id. Must return an empty collection",
 
   testErrWhenMemberIdNotFound: function()
   {
-    IN.API.Profile("not-found").error(function(data){
-      // should call error()
+    IN.API.Profile("not-found").result(function(data){
       this.resume($.noop());
     }, this);  
     
