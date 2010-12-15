@@ -20,7 +20,7 @@ helpers do
   def prod_tag(params)
     """ <script type='text/javascript' src='http://platform.linkedin.com/in.js'>
           api_key: #{params[:key]}
-          onLoad: IN.Test.onLogin
+          onLoad: LinkedIn.Test.onLogin
           authorized: true
         </script>"""
   end

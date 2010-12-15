@@ -1,99 +1,71 @@
-new IN.Test.TestSuite('NUS',[
-{
-  name: "API",
-  description: "Retrieve basic values from the Prfole() API object",
-  
-  testGetResourceAndName: function()
-  {
-    YAHOO.util.Assert.areEqual('networkupdates.get', IN.API.NetworkUpdates('me').name());
-    YAHOO.util.Assert.areEqual('/people/{IDS}/network/updates:({FIELDS})', IN.API.NetworkUpdates('me').resource());
-  }
-},
-{
-  name: "SELF",
-  description: "Get the caller's (me) updates",
-  
-  testGetMyUpdates: function()
-  {
-    var Assert = YAHOO.util.Assert;
+YUI().use('test', function(Y) {
+
+  var suite = new Y.Test.Suite("Network Updates Suite");
+
+  suite.add(new Y.Test.Case({
+
+    name : "IN.API.Network",
+
+    _should : {
+      error : {
+        "should fail for 3rd party updates" : true
+      }
+    },
+
+    "should return api name and resource" : function()
+    {
+      Y.Assert.areEqual('networkupdates.get', IN.API.NetworkUpdates('me').name());
+      Y.Assert.areEqual('/people/{IDS}/network/updates:({FIELDS})', IN.API.NetworkUpdates('me').resource());
+    },
     
-    IN.API.NetworkUpdates("me").result(function(result){
-      this.resume(function(){
-        Assert.isNotUndefined(result.values, "Must return updates");
-        Assert.isNotUndefined(result.values[0].updateContent, "Must return updateContent");
-      });
-    }, this);
-    
-    this.wait();
-  }
-},
-{
-  name: "FS",
-  description: "Get the caller's updates using field selectors",
-  
-  testGetMyUpdatesWithFieldSelectors:function()
-  {
-    var Assert = YAHOO.util.Assert;
-    
-    IN.API.NetworkUpdates("me").fields("updateType")
-      .result(function(data){
+    "should return member updates for self" : function ()
+    {
+      IN.API.NetworkUpdates("me").result(function(result){
         this.resume(function(){
-          Assert.isNotUndefined(data.values, "Must return updates");
-          Assert.isNotUndefined(data.values[0].updateType, "Must return requested field");
-          Assert.isUndefined(data.values[0].updateContent, "Must not return fields not requested");
+          Y.Assert.isNotUndefined(result.values, "Must return updates");
+          Y.Assert.isNotUndefined(result.values[0].updateContent, "Must return updateContent");
         });
       }, this);
+
+      this.wait();
+    },
+
+    "should return member updates using field selectors" : function ()
+    {
+      IN.API.NetworkUpdates("me").fields("updateType")
+        .result(function(data){
+          this.resume(function(){
+            Y.Assert.isNotUndefined(data.values, "Must return member updates");
+            Y.Assert.isNotUndefined(data.values[0].updateType, "Must return update-type");
+            Y.Assert.isUndefined(data.values[0].updateContent, "Must not return updateContent");
+          });
+      }, this);
+
+      this.wait();
+    },
+
+    "should call error() if given wrong field names" : function ()
+    {
+      IN.API.NetworkUpdates('me').fields('foo', 'bar')
+        .error(function(data){
+          this.resume(function(){});
+        }, this)
+        .result(function(data){
+          Y.Assert.fail('should call error() not result()');
+        });
+
+      this.wait();  
       
-    this.wait();
-  }
-},
-{
-  name: "OTHER-ID",
-  description: "Get the network updates passing other memeber id to force a local error",
-  
-  _should:{
-    error:{
-      testShouldFailForOthersUpdates:true,
-    }
-  },
-  
-  testShouldFailForOthersUpdates:function()
-  {
-    IN.API.NetworkUpdates("not-me").result(function(data){
-      YAHOO.util.Assert.fail("Should not call result()");
-    }, this);
-  }
-},
-{
-  name: "MANY-IDS",
-  description: "Get the network updates passing many member ids to force a local error",
-  
-  _should:{
-    error:{
-      testShouldFailForManyIds:true,
-    }
-  },
-  
-  testShouldFailForManyIds:function()
-  {
-    IN.API.NetworkUpdates("not-me").result(function(data){
-      YAHOO.util.Assert.fail();
-    }, this);
-  } 
-},
-{
-  name: "FS-ERR",
-  description: "Get the caller's network updates with wrong field selectors to force an API error",
-  
-  testShouldCallErrorForUnexistentFields:function()
-  {
-    IN.API.NetworkUpdates('me').fields('foo', 'bar')
-    .error(function(data){
-      // should call error()
-      this.resume($.noop);
-    },this);
+    },
     
-    this.wait();
-  }
-}
-]);
+    "should fail for 3rd party updates" : function ()
+    {
+      IN.API.NetworkUpdates("not-me").result(function(data){
+        Y.Assert.fail("Should not call result()");
+      }, this);
+    }
+  }));
+  LinkedIn.Test.Visuals.addVisuals(Y.Test.Runner);
+  Y.Test.Runner.add(suite);
+  Y.Test.Runner.run();  
+});

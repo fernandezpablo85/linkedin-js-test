@@ -1,51 +1,76 @@
 <html>
 <head>
-  <title>LinkedIn Connect Testing Framework</title>
-  <link href="style/main.css" rel="stylesheet" />
-  <link href='http://fonts.googleapis.com/css?family=Reenie+Beanie|Droid+Sans' rel='stylesheet'>
-  <!-- jQuery -->
-  <script  type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  
-  <!-- YUI Testing Framework -->
-  <script src="http://yui.yahooapis.com/2.8.1/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-  <script src="http://yui.yahooapis.com/2.8.1/build/logger/logger-min.js"></script>
-  <script src="http://yui.yahooapis.com/2.8.1/build/yuitest/yuitest-min.js"></script>
-    
-  <!-- Connect Testing Framework -->
-  <script src="js/main.js"></script>
-  <script src="js/controls.js"></script>
-  <script src="js/display.js"></script>
-  <script src="js/test_suite.js"></script>
-  <script src="js/test_loader.js"></script>
-  <script src="js/test_runner.js"></script>
+  <style>
+  @font-face {
+    font-family: 'Inconsolata';
+    src: local(''), url('Inconsolata.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
 
-  <%= connect_tag :server => 'pfernand-md:8080', :key => "consumer_key_1"  %>
+  *
+  {
+    font-family: 'Inconsolata', arial, serif;
+  }
 
+  div
+  {
+    padding:5px 15px 10px 40px;
+    margin:5px;
+    border:1px solid gray;
+    -webkit-border-radius:15px;
+    -moz-border-radius:15px;
+    -o-border-radius:15px;
+    height:15px;
+    width:800px;
+    cursor:pointer;
+  }
+
+  .test-case
+  {
+    background:url(./resources/ok.png) no-repeat left top;
+    -webkit-transition:opacity 1s;
+    -moz-transition:opacity 1s;
+    -o-transition:opacity 1s;
+    background-color:#AFA;
+    opacity:0.6;
+  }
+
+  .test-case:hover
+  {
+    -webkit-transition:opacity 1s;
+    -moz-transition:opacity 1s;
+    -o-transition:opacity 1s;
+    opacity:1;
+    background-color:#AFA;
+  }
+
+  div.fail:hover
+  {
+    -webkit-transition:opacity 1s;
+    -moz-transition:opacity 1s;
+    -o-transition:opacity 1s;
+    opacity:1;
+  }
+
+  div.fail
+  {
+    background:url(./resources/error.png) no-repeat left top;
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    opacity:0.6;
+    background-color:#FAA;
+  }
+  </style>
+  <%= prod_tag :key => "TRLHWeqqa-r0j2vBk6zavp-tWTbjQtfAjn2vc4edcdKxb_QmVcbmLOTB93atIhSV"  %>
+  <title>Connect</title>
 </head>
 <body>
-  <div id='main'>
-    <div id="login-button">
-      <div id="legend">To run the test suite...</div>
-      <script type="in/login"></script>
-      <br style="clear:both"/>
-      <a href="https://pfernandez-box.linkedin.biz:8443/leo/secure/" target="_blank">get this machine SSL cert!</a>
-      <br style="clear:both"/>
-    </div>
-    <div id='header'>
-      <h1>LinkedIn Connect Test Framework</h1>
-    </div>
-    <div id="content">
-      <div id="info">
-      </div>
-
-      <div id="control-panel">
-        <button id="run">Run Tests</button>
-      </div>
-
-      <div id="test-results">
-      </div>
-      <br style="clear:both"/>
-    </div>
-  </div>
+  <section id='content'></section>
+  <script type="in/login"></script>
+  <script src='js/visuals.js'></script>
+  <!-- Framework Files -->
+  <script src="js/yui.js"></script>
 </body>
 </html>

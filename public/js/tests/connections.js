@@ -1,87 +1,73 @@
-new IN.Test.TestSuite('CONN',[
-{
-  name: "API",
-  description: "Retrieve basic values from the Prfole() API object",
-  
-  testApiResourceAndName: function()
-  {
-    var Assert = YAHOO.util.Assert;
+YUI().use('test', function(Y) {
+
+  var suite = new Y.Test.Suite("Connections Suite");
+
+  suite.add(new Y.Test.Case({
+
+    name : "IN.API.Connections",
     
-    Assert.areEqual('connections.get', IN.API.Connections('me').name());
-    Assert.areEqual('/people/{IDS}/connections:({FIELDS})', IN.API.Connections('me').resource()); 
-  }
-},
-{
-  name: "SELF",
-  description: "Get the caller's (me) connections",
+    _should : {
+      error : {
+        "should fail if triying to retrieve connections for more than one id" : true
+      }
+    },
 
-  testGetMyConnections: function()
-  {
-    var Assert = YAHOO.util.Assert;
+    "should return api name and resource": function ()
+    {
+      Y.Assert.areEqual('connections.get', IN.API.Connections('me').name());
+      Y.Assert.areEqual('/people/{IDS}/connections:({FIELDS})', IN.API.Connections('me').resource()); 
+    },
 
-    IN.API.Connections("me").result(function(result){
-      this.resume(function(){
-        Assert.isNotUndefined(result.values, "Results should be defined");
-        Assert.isString(result.values[0].firstName, "Should return first name");
-        Assert.isString(result.values[0].lastName, "Should return last name");
-        Assert.isNumber(result._total, "Should return connection totals");
-      });
-    }, this);
-    
-    this.wait();
-  }
-},
-{
-  name: "FS",
-  description: "Get the caller's connections using field selectors",
-
-  testGetMyConnectionsFieldSelectors: function()
-  {
-    var Assert = YAHOO.util.Assert;
-
-    IN.API.Connections("me").fields("firstName", "lastName")
-      .result(function(connections){
+    "should return connections for self" : function ()
+    {
+      IN.API.Connections("me").result(function(result){
         this.resume(function(){
-          Assert.isNotUndefined(connections.values, "Connections should be defined");
-          Assert.isString(connections.values[0].firstName, "Must bring firstName");
-          Assert.isUndefined(connections.values[0].headline, "Must not bring headline");    
+          Y.Assert.isNotUndefined(result.values, "Results should be defined");
+          Y.Assert.isString(result.values[0].firstName, "Should return first name");
+          Y.Assert.isString(result.values[0].lastName, "Should return last name");
+          Y.Assert.isNumber(result._total, "Should return connection totals");
         });
-      },this);
-    
-    this.wait();
-  }
-},
-{
-  name: "MANY-IDS",
-  description:"Get connections for more than one id to force a local error",
+      }, this);
+      this.wait();
+    },
 
-  _should: {
-    error:{
-      testGetConnectionsForManyIds:true
+    "should return connections using field selectors": function()
+    {
+      IN.API.Connections("me").fields("firstName", "lastName")
+        .result(function(connections){
+          this.resume(function(){
+            Y.Assert.isNotUndefined(connections.values, "Connections should be defined");
+            Y.Assert.isString(connections.values[0].firstName, "Must bring firstName");
+            Y.Assert.isUndefined(connections.values[0].headline, "Must not bring headline");    
+          });
+        },this);
+
+      this.wait();
+    },
+
+    "should fail if triying to retrieve connections for more than one id" : function ()
+    {
+      IN.API.Connections("id1","id2").
+        result(function(data){
+          YAHOO.util.Assert.fail("must not call result()");
+        });
+    },
+
+    "should call error() if asked for wrong fields" : function ()
+    {
+      IN.API.Connections('me').fields('foo', 'bar')
+        .error(function(data){
+          this.resume(function(){});
+        }, this)
+        .result(function(data){
+          Y.Assert.fail('must not call result() but error()');
+        }, this);
+
+      this.wait();
     }
-  },
+  }));
 
-  testGetConnectionsForManyIds: function()
-  {
-    IN.API.Connections("id1","id2").
-      result(function(data){
-        YAHOO.util.Assert.fail("must not call result()");
-      });
-  }
-},
-{
-  name: "FS-ERR",
-  description: "Get connections with wrong field selectors to force an API error",
-
-  testGetConnectionWithNotSupportedFields:function()
-  {
-    IN.API.Connections('me').fields('foo', 'bar')
-      .error(function(data){
-        // should call error()
-        this.resume($.noop());
-      },this);  
-
-    this.wait();
-  }
-}
-]);
+  LinkedIn.Test.Visuals.addVisuals(Y.Test.Runner);
+  Y.Test.Runner.add(suite);
+  Y.Test.Runner.run();  
+});
