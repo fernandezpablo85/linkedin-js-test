@@ -1,81 +1,76 @@
-new IN.Test.TestSuite('SEARCH',[
-{
-  name: "API",
-  description: "Retrieve basic values from the Prfole() API object",
-  
-  testGetApiNameAndResource: function()
-  {
-    var Assert = YAHOO.util.Assert;
-    Assert.areEqual("peoplesearch.get", IN.API.PeopleSearch().name(), "Wrong API name");
-    Assert.areEqual("/people-search:(people:({FIELDS}),num-results)", IN.API.PeopleSearch().resource(), "Wrong API resource");
-  }
-},
-{
-  name: "BASIC",
-  description: "Perform a basic search using custom params",
-  
-  testShouldSearchWithFields: function()
-  {
-    var Assert = YAHOO.util.Assert;
+YUI().use('test', function(Y) {
+
+  var suite = new Y.Test.Suite("Search Suite");
+
+  suite.add(new Y.Test.Case({
+
+    name : "IN.API.PeopleSearch",
     
-    IN.API.PeopleSearch().params({"industry":"Marketing"}).
+    _should:{
+      error:{
+        "should fail for other than 'me'" : true,
+        "should fail for strings as params" : true
+      }
+    },
+    
+    "should return api name and resource" : function()
+    {
+      Y.Assert.areEqual("peoplesearch.get", IN.API.PeopleSearch().name(), "Wrong API name");
+      Y.Assert.areEqual("/people-search:(people:({FIELDS}),num-results)", IN.API.PeopleSearch().resource(), "Wrong API resource");
+    },
+
+    "should search by field" : function ()
+    {
+      IN.API.PeopleSearch().params({"industry":"Marketing"}).
+        result(function(data){
+          this.resume(function(){
+            Y.Assert.isNotUndefined(data, "Should not return undefined");
+          });
+        }, this);
+
+      this.wait();
+    },
+
+    "should fail for other than 'me'" : function ()
+    {
+      IN.API.PeopleSearch("other-id").result(function(data){
+        Y.Assert.fail("should never call result");
+      });
+    },
+
+    "should call error() for unexistent fields" : function ()
+    {
+      IN.API.PeopleSearch().fields('foo', 'bar').error(function(data){
+        this.resume(function(){});
+      }, this).
       result(function(data){
-        this.resume(function(){
-          Assert.isNotUndefined(data, "Should not return undefined");
-        });
+        Y.Assert.fail('should call error() instead of result()');
+      });
+
+      this.wait();
+    },
+
+    "should call error() if given unexistent fields" : function () 
+    {
+      IN.API.PeopleSearch().fields('foo', 'bar').error(function(data){
+        this.resume(function(){});
+      }, this).
+      result(function(data){
+        Y.Assert.fail("should call error() not result()");
+      });
+
+      this.wait();
+    },
+
+    "should fail for strings as params" : function () 
+    {
+      IN.API.PeopleSearch().params('foo', 'bar').result(function(data){
+        YAHOO.util.Assert.fail("Should not call result()");
       }, this);
-      
-    this.wait();
-  }
-},
-{
-  name: "ID-ERR",
-  description: "Perform a search passing a member id to force a local error",
-  
-  _should:{
-    error:{
-      testShouldFailForOthers:true
     }
-  },
-  
-  testShouldFailForOthers: function()
-  {
-    var Assert = YAHOO.util.Assert;
-    
-    IN.API.PeopleSearch("other-id").result(function(data){
-      Assert.fail("should never call result");
-    });
-  }
-},
-{
-  name: "FS-ERR",
-  description: "Perform a search with wrong fields to force an API error",
-  
-  testShouldFailForUnexistentFields:function()
-  {
-    IN.API.PeopleSearch().fields('foo', 'bar').error(function(data){
-      //should call error()
-      this.resume($.noop());
-    }, this);
-    
-    this.wait();
-  }
-},
-{
-  name: "PARAM-ERR",
-  description: "Perform a search passing strings as parameters to force a local error",
-  
-  _should:{
-    error:{
-      testShouldFailForStringsAsParams:true
-    }
-  },
-  
-  testShouldFailForStringsAsParams:function()
-  {
-    IN.API.PeopleSearch().params('foo', 'bar').result(function(data){
-      YAHOO.util.Assert.fail("Should not call result()");
-    }, this);
-  }
-}
-]);
+  }));
+
+  LinkedIn.Test.Visuals.addVisuals(Y.Test.Runner);
+  Y.Test.Runner.add(suite);
+  Y.Test.Runner.run();
+});

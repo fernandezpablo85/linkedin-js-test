@@ -1,102 +1,87 @@
-new IN.Test.TestSuite('PROFILE',[
-{
-  name: "SELF",
-  description: "Get the caller's (me) profile",
+YUI().use('test', function(Y) {
 
-  testGetMyProfile: function()
-  {
-    var Assert = YAHOO.util.Assert;
+  var suite = new Y.Test.Suite("Profile Suite");
 
-    IN.API.Profile("me").fields("firstName", "lastName", "connections", "industry")
-    .result(function(result){
-      this.resume(function(){
-        Assert.isNotUndefined(result.values, "Profile should be defined");
-        Assert.isString(result.values[0].firstName, "Should return first name");
-        Assert.isString(result.values[0].lastName, "Should return last name");
-        Assert.isNumber(result.values[0].connections._total, "Should return connection totals");
-      });
-    }, this);
+  suite.add(new Y.Test.Case({
 
-    this.wait(); 
-  }
-},
-{
-  name:"FS-ERR",
-  description:"Get the callers profile using wrong field selectors to force an API error",
-     
-  testGetWrongFields: function()
-  {
-    IN.API.Profile("me").fields('firstName', 'experience')
-    .error(function(result){
-      this.resume(function(){
-        YAHOO.util.Assert.areEqual(400, result.status, "Should return 400 status");
-      });
-    }, this);
-      
-    this.wait();
-  }
-},
-{
-  name:"FS",
-  description:"Get the callers profile with field selectors",
+    name : "IN.API.Profile",
 
-  testGetWithFields: function()
-  {
-    var Assert = YAHOO.util.Assert;
+    _should : {
+      error : {
+        "should fail if no ID given" : true
+      }
+    },
 
-    IN.API.Profile("me").fields("firstName", "industry", "connections")
-    .result(function(result){
-      this.resume(function(){
-        Assert.isNotUndefined(result.values, "Profile should be defined");
-        Assert.isString(result.values[0].firstName, "Should return first name");
-        Assert.isUndefined(result.values[0].lastName, "Should not bring last name");
-        Assert.isString(result.values[0].industry, "Should return 'industry'");
-        Assert.isNumber(result.values[0].connections._total, "Should return connection totals");
-      });
-    }, this);
+    "should return api name and resource" : function()
+    {
+      Y.Assert.areEqual("people.get", IN.API.Profile("me").name(), "Wrong API name");
+      Y.Assert.areEqual("/people::({IDS}){ISPUBLIC}:({FIELDS})", IN.API.Profile("me").resource(), "Wrong API resource");    
+    },
 
-    this.wait();  
-  }
-},
-{
-  name: "NO-ID",
-  description: "Get a profile without providing an Id to force a local error",
+    "should return self profile" : function ()
+    {
+      IN.API.Profile("me").fields("firstName", "lastName", "connections", "industry")
+      .result(function(result){
+        this.resume(function(){
+          Y.Assert.isNotUndefined(result.values, "Profile should be defined");
+          Y.Assert.isString(result.values[0].firstName, "Should return first name");
+          Y.Assert.isString(result.values[0].lastName, "Should return last name");
+          Y.Assert.isNumber(result.values[0].connections._total, "Should return connection totals");
+        });
+      }, this);
 
-  _should:{
-    error:{
-      testGetWithoutID:true
-    }
-  },
+      this.wait(); 
+    },
 
-  testGetWithoutID : function()
-  {
-    IN.API.Profile().result(function(result){
-      YAHOO.util.Assert.fail('Should not call result()');
-    }, this);
-  }
-},
-{
-  name: "WRONG-ID",
-  description: "Get a profile providing a non existent id. Must return an empty collection",
+    "should call error() if given wrong field selectors" : function ()
+    {
+      IN.API.Profile("me").fields('firstName', 'experience')
+        .error(function(result){
+          this.resume(function(){});
+        }, this)
+        .result(function(result){
+          Y.Assert.fail("should call error() not result()");
+        }, this);
 
-  testErrWhenMemberIdNotFound: function()
-  {
-    IN.API.Profile("not-found").result(function(data){
-      this.resume($.noop());
-    }, this);  
+      this.wait();
+    },
     
-    this.wait();
-  }
-},
-{
-  name: "API",
-  description: "Retrieve basic values from the Prfole() API object",
+    "should return self profile with field selectors" : function ()
+    {
+      IN.API.Profile("me").fields("firstName", "industry", "connections")
+      .result(function(result){
+        this.resume(function(){
+          Y.Assert.isNotUndefined(result.values, "Profile should be defined");
+          Y.Assert.isString(result.values[0].firstName, "Should return first name");
+          Y.Assert.isUndefined(result.values[0].lastName, "Should not bring last name");
+          Y.Assert.isString(result.values[0].industry, "Should return 'industry'");
+          Y.Assert.isNumber(result.values[0].connections._total, "Should return connection totals");
+        });
+      }, this);
 
-  testApiResourceAndName: function()
-  {
-    var Assert = YAHOO.util.Assert;
+      this.wait();
+    },
     
-    Assert.areEqual("people.get", IN.API.Profile("me").name(), "Wrong API name");
-    Assert.areEqual("/people::({IDS}){ISPUBLIC}:({FIELDS})", IN.API.Profile("me").resource(), "Wrong API resource");
-  }
-}]);
+    "should fail if no ID given" : function ()
+    {
+      IN.API.Profile().result(function(result){
+        YAHOO.util.Assert.fail('Should not call result()');
+      }, this);
+    },
+    
+    "should return an empty collection if no profile was found" : function ()
+    {
+      IN.API.Profile("not-found").result(function(data){
+        this.resume($.noop());
+      }, this).
+      error(function(data){
+        Y.Assert.fail("should call result() not error()");
+      });
+      this.wait();
+    },
+  }));
+  
+  LinkedIn.Test.Visuals.addVisuals(Y.Test.Runner);
+  Y.Test.Runner.add(suite);
+  Y.Test.Runner.run();
+});

@@ -14,7 +14,7 @@ LinkedIn.Test.onLogin = function () {
 }
 
 LinkedIn.Test.loadSuites = function () {
-  var suites = ['connections', 'member_updates', 'network_updates'], i = 0;
+  var suites = ['connections', 'member_updates', 'network_updates', 'profile', 'raw', 'search'], i = 0;
   for(; i < suites.length ; i++) {
     LinkedIn.Test.appendScript(suites[i]);
   }
