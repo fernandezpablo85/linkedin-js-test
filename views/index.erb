@@ -1,7 +1,8 @@
 <html>
 <head>
   <style>
-  @font-face {
+  @font-face 
+  {
     font-family: 'Inconsolata';
     src: local(''), url('Inconsolata.ttf') format('truetype');
     font-weight: normal;
@@ -62,12 +63,23 @@
     opacity:0.6;
     background-color:#FAA;
   }
+
+  #connect-url
+  {
+    width: 500px;
+  }
+
   </style>
-  <%= prod_tag :key => "TRLHWeqqa-r0j2vBk6zavp-tWTbjQtfAjn2vc4edcdKxb_QmVcbmLOTB93atIhSV"  %>
   <title>Connect</title>
 </head>
 <body>
+  <section id='menu'>
+    <label for='connect-url'>File to test:</label>
+    <input type='text' id='connect-url' />
+    <button id='load-connect-framework'>Load</button>
+  </section>
   <section id='content'></section>
+  <script src='js/main.js'></script>
   <script type="in/login"></script>
   <script src='js/visuals.js'></script>
   <!-- Framework Files -->
