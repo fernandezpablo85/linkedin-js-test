@@ -64,25 +64,63 @@
     background-color:#FAA;
   }
 
-  #connect-url
+  #connect-url, #connect-key
   {
-    width: 500px;
+    width: 700px;
+    font-size:20px;
+  }
+
+  #load-connect-framework
+  {
+    font-size:25px;
+    cursor:pointer;
+  }
+
+  #title, #menu
+  {
+    padding: 10px 20px;
   }
 
   </style>
   <title>Connect</title>
 </head>
 <body>
-  <section id='menu'>
-    <label for='connect-url'>File to test:</label>
-    <input type='text' id='connect-url' />
-    <button id='load-connect-framework'>Load</button>
+
+  <section id='title'>
+    <h1>Connect Testing Framework</h1>
+    <h3>Please enter server and api-key</h3>
   </section>
-  <section id='content'></section>
+
+  <section id='menu'>
+    <label for='connect-url'>File to test:</label><br/>
+    <input type='text' id='connect-url' value='http://platform.linkedin.com/in.js' /><br/>
+    <label for='connect-key'>Connect Api key:</label><br/>
+    <input type='text' id='connect-key' value='lJpJujyBNPjmE7ToElSznzlaEsBnD371aSRNslkeuwd--9sdwlndibvSd-mKY3fV' /><br/>
+    <button id='load-connect-framework' onclick='loadFramework();'>Load</button>
+  </section>
+
+  <section id='content'>
+    <!-- test results go here -->
+  </section>
+  <script src='js/yui.js'></script>
   <script src='js/main.js'></script>
   <script type="in/login"></script>
   <script src='js/visuals.js'></script>
   <!-- Framework Files -->
-  <script src="js/yui.js"></script>
+  <script>
+    function loadFramework () {
+      document.getElementById('load-connect-framework').setAttribute('disabled', true);
+      var source = document.getElementById('connect-url').value;
+      var tag = document.createElement('script');
+      var key = document.getElementById('connect-key').value;
+      tag.src = source;
+      tag.appendChild(document.createTextNode("\napi_key: "+ key +"\nonLoad:LinkedIn.Test.onLogin\n"));
+      document.getElementsByTagName('head')[0].appendChild(tag);
+    }
+
+    function frameworkLoaded () {
+      console.log('framework done');
+    }
+  </script>
 </body>
 </html>
