@@ -10,6 +10,10 @@ YUI().use('test', function(Y) {
       error:{
         "should fail for other than 'me'" : true,
         "should fail for strings as params" : true
+      },
+      ignore: {
+        "should perform faceted search" : false,
+        "should perform empty faceted search" : false
       }
     },
     
@@ -65,8 +69,49 @@ YUI().use('test', function(Y) {
     "should fail for strings as params" : function () 
     {
       IN.API.PeopleSearch().params('foo', 'bar').result(function(data){
-        YAHOO.util.Assert.fail("Should not call result()");
+        Y.Assert.fail("Should not call result()");
       }, this);
+    },
+
+    // FACETS
+
+    "should perform faceted search" : function ()
+    {
+      IN.API.PeopleSearch()
+            .fields("firstName", "lastName")
+            .facets("name", "code").result(function(data) {
+              this.resume(function(){
+                Y.Assert.isNotUndefined(data, "Should not return undefined");
+              })
+            }, this);
+
+      this.wait();
+    },
+
+    "should perform empty faceted search" : function ()
+    {
+      IN.API.PeopleSearch()
+            .fields("firstName", "lastName").facets().result(function(data) {
+              this.resume(function(){
+                Y.Assert.isNotUndefined(data, "Should not return undefined");
+              })
+            }, this);
+
+      this.wait();
+    },
+
+    "should fail for unexistent facets" : function ()
+    {
+      IN.API.PeopleSearch()
+            .fields("firstName", "lastName").facets("not-a-facet")
+            .result(function() {
+              Y.Assert.fail('Should not call result() but error()');
+            })
+            .error(function(data){
+              this.resume(function(){});
+            },this);
+
+      this.wait();
     }
   }));
 
