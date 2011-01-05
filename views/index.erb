@@ -93,9 +93,9 @@
 
   <section id='menu'>
     <label for='connect-url'>File to test:</label><br/>
-    <input type='text' id='connect-url' value='http://platform.linkedin.com/in.js' /><br/>
+    <input type='text' id='connect-url' value='<%=server_url%>' /><br/>
     <label for='connect-key'>Connect Api key:</label><br/>
-    <input type='text' id='connect-key' value='lJpJujyBNPjmE7ToElSznzlaEsBnD371aSRNslkeuwd--9sdwlndibvSd-mKY3fV' /><br/>
+    <input type='text' id='connect-key' value='<%= params[:key] || "lJpJujyBNPjmE7ToElSznzlaEsBnD371aSRNslkeuwd--9sdwlndibvSd-mKY3fV"%>' /><br/>
     <button id='load-connect-framework' onclick='loadFramework();'>Load</button>
   </section>
 
