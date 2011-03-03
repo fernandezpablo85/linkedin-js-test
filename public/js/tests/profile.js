@@ -30,7 +30,7 @@ YUI().use('test', function(Y) {
         });
       }, this);
 
-      this.wait(); 
+      this.wait(LinkedIn.Test.TIMEOUT); 
     },
 
     "should call error() if given wrong field selectors" : function ()
@@ -43,7 +43,7 @@ YUI().use('test', function(Y) {
           Y.Assert.fail("should call error() not result()");
         }, this);
 
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
     
     "should return self profile with field selectors" : function ()
@@ -59,7 +59,7 @@ YUI().use('test', function(Y) {
         });
       }, this);
 
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
     
     "should fail if no ID given" : function ()
@@ -77,7 +77,7 @@ YUI().use('test', function(Y) {
       error(function(data){
         Y.Assert.fail("should call result() not error()");
       });
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
   }));
   

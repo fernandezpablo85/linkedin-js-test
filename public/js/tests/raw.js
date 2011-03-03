@@ -30,7 +30,7 @@ YUI().use('test', function(Y) {
           });
         }, this);
 
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
 
     "should perform raw POST call (Activity Update)" : function ()
@@ -48,7 +48,7 @@ YUI().use('test', function(Y) {
                 Assert.fail("Not 2xx response");
               });
             }, this);
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
     
     "should perform raw POST call (Share)" : function ()
@@ -68,7 +68,7 @@ YUI().use('test', function(Y) {
                 Assert.fail("Not 2xx response");
               });
             }, this);
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
 
     "should perform raw PUT call" : function ()
@@ -88,7 +88,7 @@ YUI().use('test', function(Y) {
             Assert.fail("Not 2xx response");  
           })
         }, this);
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     }
   }));
 

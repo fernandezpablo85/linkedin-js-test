@@ -1,6 +1,8 @@
 var LinkedIn = LinkedIn || {};
 LinkedIn.Test = {};
 
+LinkedIn.Test.TIMEOUT = 3000;
+
 LinkedIn.Test.appendScript = function (name) {
   var head= document.getElementsByTagName('head')[0];
   var script= document.createElement('script');

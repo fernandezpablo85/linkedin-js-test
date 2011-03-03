@@ -27,7 +27,7 @@ YUI().use('test', function(Y) {
         });
       }, this);
 
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
     
     "should return member updates using field selectors" : function ()
@@ -41,7 +41,7 @@ YUI().use('test', function(Y) {
           });
       }, this);
 
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
     
     "should call error() if given wrong field names" : function ()
@@ -54,7 +54,7 @@ YUI().use('test', function(Y) {
           Y.Assert.fail('should call error() not result()');
         });
 
-      this.wait();  
+      this.wait(LinkedIn.Test.TIMEOUT);  
       
     }
   }));

@@ -28,7 +28,7 @@ YUI().use('test', function(Y) {
           Y.Assert.isNumber(result._total, "Should return connection totals");
         });
       }, this);
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
 
     "should return connections using field selectors": function()
@@ -42,7 +42,7 @@ YUI().use('test', function(Y) {
           });
         },this);
 
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
 
     "should fail if triying to retrieve connections for more than one id" : function ()
@@ -63,7 +63,7 @@ YUI().use('test', function(Y) {
           Y.Assert.fail('must not call result() but error()');
         }, this);
 
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     }
   }));
 

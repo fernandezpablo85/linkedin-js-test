@@ -32,7 +32,7 @@ YUI().use('test', function(Y) {
           });
         }, this);
 
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
 
     "should fail for other than 'me'" : function ()
@@ -51,7 +51,7 @@ YUI().use('test', function(Y) {
         Y.Assert.fail('should call error() instead of result()');
       });
 
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
 
     "should call error() if given unexistent fields" : function () 
@@ -63,7 +63,7 @@ YUI().use('test', function(Y) {
         Y.Assert.fail("should call error() not result()");
       });
 
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
 
     "should fail for strings as params" : function () 
@@ -85,7 +85,7 @@ YUI().use('test', function(Y) {
               })
             }, this);
 
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
 
     "should perform empty faceted search" : function ()
@@ -97,7 +97,7 @@ YUI().use('test', function(Y) {
               })
             }, this);
 
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     },
 
     "should fail for unexistent facets" : function ()
@@ -111,7 +111,7 @@ YUI().use('test', function(Y) {
               this.resume(function(){});
             },this);
 
-      this.wait();
+      this.wait(LinkedIn.Test.TIMEOUT);
     }
   }));
 
