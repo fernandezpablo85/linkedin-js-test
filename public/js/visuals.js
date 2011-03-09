@@ -35,12 +35,16 @@ LinkedIn.Test.Visuals = {
 
   onTestPassed : function (data) {
     console.log(data);
-    LinkedIn.Test.Visuals.container.innerHTML += '<div class="test-case">' + data.testCase.name + ":" + data.testName + '</div>';
+    var container = LinkedIn.Test.Visuals.container;
+    var newContents = container.innerHTML + '<div class="test-case">' + data.testCase.name + ":" + data.testName + '</div>';
+    container.innerHTML = newContents;
   },
 
   onTestFailed : function (data) {
-    LinkedIn.Test.Visuals.container.innerHTML += '<div class="test-case, fail" title="'+ data.error +'">' + data.testCase.name + ":" + data.testName + '</div>';
-    document.title = LinkedIn.Test.Visuals.title + " (" + (++LinkedIn.Test.Visuals.failures) + ")";
     console.error(data);
+    var container = LinkedIn.Test.Visuals.container;
+    var newContents = container.innerHTML + '<div class="test-case, fail" title="'+ data.error +'">' + data.testCase.name + ":" + data.testName + '</div>';
+    container.innerHTML = newContents;
+    document.title = LinkedIn.Test.Visuals.title + " (" + (++LinkedIn.Test.Visuals.failures) + ")";
   }
 }
