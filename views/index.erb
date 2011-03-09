@@ -113,7 +113,17 @@
       var tag = document.createElement('script');
       var key = document.getElementById('connect-key').value;
       tag.src = source;
-      tag.appendChild(document.createTextNode("\napi_key: "+ key +"\nonLoad:LinkedIn.Test.onLogin\n"));
+      var tagBody = "\napi_key: "+ key +"\nonLoad:LinkedIn.Test.onLogin\n";
+      try
+      {
+        tag.appendChild(document.createTextNode(tagBody));
+      }
+      // This can fail in IE
+      catch(e)
+      {
+        tag.text = tagBody;
+      }
+
       document.getElementsByTagName('head')[0].appendChild(tag);
     }
 
